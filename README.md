@@ -1,3 +1,126 @@
+# SoftwareDocBot: Bridging the Gap Between Developers and Business Users
+
+## Class Project for AT82.05 – Artificial Intelligence: Natural Language Understanding  
+**Supervised by:** Asst. Prof. Chaklam Silpasuwanchai  
+**Team Name:** Software Intelligence Squad
+
+## Table of Contents
+- [Team Members](#team-members)
+- [Introduction](#introduction)
+- [Problem Statement](#problem-statement)
+- [Motivation](#motivation)
+- [Use Cases & Expected Results](#use-cases--expected-results)
+- [Related Work](#related-work)
+- [Methodology](#methodology)
+- [Dataset](#dataset)
+- [Data Preprocessing](#data-preprocessing)
+- [Model Pipeline](#model-pipeline)
+- [Training Strategy](#training-strategy)
+- [Evaluation Metrics](#evaluation-metrics)
+- [Progress](#progress)
+- [References](#references)
+
+## Team Members
+- **Kaung Nyo Lwin** – Data Science and AI, AIT ([st125066@ait.ac.th](mailto:st125066@ait.ac.th))
+- **Phone Myint Naing** – Data Science and AI, AIT ([st124973@ait.ac.th](mailto:st124973@ait.ac.th))
+- **Khin Yadanar Hlaing** – Data Science and AI, AIT ([st124959@ait.ac.th](mailto:st124959@ait.ac.th))
+
+## Introduction
+SoftwareDocBot is an intelligent documentation assistant that transforms SQL queries and relational database schemas into natural language explanations. This tool is designed to serve both developers and business users, allowing them to ask questions, understand software logic, and stay up-to-date as systems evolve.
+
+## Problem Statement
+Modern software systems rely heavily on complex SQL queries and intricate schemas. However:
+- Developers often work with poorly documented queries.
+- Business users are unable to interpret database logic.
+- Cross-functional miscommunication slows down projects.
+- System updates lack immediate documentation, leading to confusion.
+
+## Motivation
+SoftwareDocBot enables both technical and non-technical users to understand and interact with a software system. Key motivations include:
+- **Bridging technical-business gaps** with natural language explanations.
+- **Reducing onboarding time** by automatically generating query and schema summaries.
+- **Keeping documentation fresh** through retraining when the system updates.
+- **Enhancing collaboration** through a conversational chatbot interface.
+
+## Use Cases & Expected Results
+
+### **Use Case 1: SQL Query Explanation**
+**Workflow:**
+1. User submits a SQL query.
+2. The query is parsed using `sqlglot`.
+3. A structured representation is created.
+4. A language model generates a plain-language explanation.
+
+**Expected Outcome:** Business users understand what a query does.
+
+---
+
+### **Use Case 2: Schema Summary and Change Tracking**
+**Workflow:**
+1. User requests explanation of a table or joins.
+2. Schema is converted to a knowledge graph using `NetworkX`.
+3. Contextual documentation is retrieved with FAISS.
+4. GPT-4 explains relationships and recent changes.
+
+**Expected Outcome:** Users are informed about data relationships and updates.
+
+## Related Work
+- **Spider Dataset** for text-to-SQL evaluation (Yu et al., 2018)
+- **RAT-SQL** for relation-aware schema encoding (Wang et al., 2020)
+- **COMET** for commonsense graph completion (Bosselut et al., 2019)
+- **Knowledge-Aware Reader** for QA over incomplete KBs (Xiong et al., 2019)
+
+## Methodology
+SoftwareDocBot integrates:
+- **SQL Parsing:** Extracts tables, columns, joins, conditions.
+- **Schema Graph Construction:** Builds a relational map.
+- **Contextual Retrieval:** Embeds schema/query elements with FAISS.
+- **Natural Language Generation:** GPT-4 creates documentation in plain English.
+
+## Dataset
+- SQL samples collected from open-source systems.
+- Schema examples from normalized and denormalized databases.
+- Additional business questions for evaluation.
+
+## Data Preprocessing
+- SQL standardization using `sqlglot`
+- Deduplication and formatting
+- Embedding generation using `sentence-transformers`
+
+## Model Pipeline
+1. **Input Parser:** Tokenizes and parses SQL.
+2. **Graph Builder:** Builds entity relationships.
+3. **Vector Indexing:** Stores schema/query embeddings.
+4. **Retriever:** Finds nearest matches for RAG.
+5. **LLM Explainer:** GPT-4 generates text.
+6. **Chatbot Interface:** Presents results and takes questions.
+
+## Training Strategy
+- Fine-tuning on SQL–text pairs (optional)
+- Retrieval tuning with hard negatives
+- Prompt engineering for multi-turn QA
+
+## Evaluation Metrics
+- **BLEU, ROUGE:** for NLG quality
+- **Human Feedback:** Developer and business user surveys
+- **RAG Effectiveness:** Precision@k for embedding retrieval
+
+## Progress
+- [x] SQL parsing pipeline complete
+- [x] Graph and vector indexing module prototyped
+- [x] Initial explanation generation works on test set
+- [ ] Final integration into chatbot UI
+- [ ] Evaluation via business-user scenarios
+
+
+
+## References
+1. Yu, T., et al. (2018). Spider: A Large-Scale Human-Labeled Dataset for Complex and Cross-Domain Semantic Parsing and Text-to-SQL Task. ACL.
+2. Wang, B., et al. (2020). RAT-SQL: Relation-Aware Schema Encoding and Linking for Text-to-SQL Parsers. ACL.
+3. Bosselut, A., et al. (2019). COMET: Commonsense Transformers for Knowledge Graph Construction. ACL.
+4. Xiong, W., et al. (2019). Improving Question Answering over Incomplete KBs with Knowledge-Aware Reader. ACL.
+
+
 # system_expert_bot
 
 ## Abstract
