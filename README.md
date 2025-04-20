@@ -1,16 +1,27 @@
 # SoftwareDocBot: Bridging the Gap Between Developers and Business Users  
 _A Schema-Aware NLP Assistant for SQL and Software System Documentation_
 
+## Class Project for AT82.05 – Artificial Intelligence: Natural Language Understanding  
+**Supervised by:** Asst. Prof. Chaklam Silpasuwanchai  
+**Team Name:** Software Intelligence Squad
+
+
 ---
-##  Project Workflow
-
-![SoftwareDocBot Architecture](assets/workflow.png)
-
+## Team Members
+- **Kaung Nyo Lwin** – Data Science and AI, AIT ([st125066@ait.ac.th](mailto:st125066@ait.ac.th))
+- **Phone Myint Naing** – Data Science and AI, AIT ([st124973@ait.ac.th](mailto:st124973@ait.ac.th))
+- **Khin Yadanar Hlaing** – Data Science and AI, AIT ([st124959@ait.ac.th](mailto:st124959@ait.ac.th))
 ---
 
 ##  Abstract
 
 **SoftwareDocBot** is an AI-powered documentation assistant that explains SQL queries and database schema structures in plain, human-readable language. Designed for both developers and business stakeholders, it leverages SQL parsing, knowledge graphs, retrieval-augmented generation (RAG), and fine-tuned language models to deliver contextual explanations of software logic. It also supports interactive Q&A about database behavior—making software systems more transparent, maintainable, and accessible to all levels of users.
+
+---
+##  Project Workflow
+
+![SoftwareDocBot Architecture](assets/workflow.png)
+
 
 ---
 
