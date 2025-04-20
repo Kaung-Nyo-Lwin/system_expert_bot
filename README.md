@@ -6,24 +6,22 @@ _A Schema-Aware NLP Assistant for SQL and Software System Documentation_
 **Team Name:** Software Intelligence Squad
 
 
----
+
 ## Team Members
 - **Kaung Nyo Lwin** – Data Science and AI, AIT ([st125066@ait.ac.th](mailto:st125066@ait.ac.th))
 - **Phone Myint Naing** – Data Science and AI, AIT ([st124973@ait.ac.th](mailto:st124973@ait.ac.th))
 - **Khin Yadanar Hlaing** – Data Science and AI, AIT ([st124959@ait.ac.th](mailto:st124959@ait.ac.th))
----
+
 
 ##  Abstract
 
 **SoftwareDocBot** is an AI-powered documentation assistant that explains SQL queries and database schema structures in plain, human-readable language. Designed for both developers and business stakeholders, it leverages SQL parsing, knowledge graphs, retrieval-augmented generation (RAG), and fine-tuned language models to deliver contextual explanations of software logic. It also supports interactive Q&A about database behavior—making software systems more transparent, maintainable, and accessible to all levels of users.
 
----
+
 ##  Project Workflow
 
 ![SoftwareDocBot Architecture](assets/workflow.png)
 
-
----
 
 ##  Problem Statement
 
@@ -33,7 +31,6 @@ Modern software systems depend heavily on complex SQL queries and dynamic schema
 - Traditional documentation focuses on structure, not semantics.
 - Miscommunication slows development and onboarding.
 
----
 
 ##  Project Goals
 
@@ -42,7 +39,6 @@ Modern software systems depend heavily on complex SQL queries and dynamic schema
 - Support schema-aware documentation with real-time querying.
 - Reduce hallucination in LLMs using graph-based schema grounding.
 
----
 
 ## Scope of the Project
 
@@ -53,7 +49,7 @@ SoftwareDocBot integrates:
 - Explanation generation using a fine-tuned `TinyLlama-1.1B-Chat` model
 - An event-driven, agentic workflow to coordinate parsing, retrieval, generation, and feedback
 
----
+
 
 ##  Related Work
 
@@ -63,7 +59,7 @@ To strengthen schema reasoning, we draw on graph-based learning methods, such as
 
 Finally, we incorporate an **agentic workflow**, a concept proposed in recent LLM literature (Zhuge et al., 2023; Hong et al., 2024), to ensure modular control over execution, quality review, and iterative refinement.
 
----
+
 
 ##  Methodology Overview
 
@@ -88,7 +84,7 @@ Modular, event-driven pipeline coordinating:
 ###  LLM Fine-Tuning
 Uses the **Gretel Synthetic Text-to-SQL Dataset** to fine-tune `TinyLlama-1.1B-Chat`, training it to explain queries using structured context and domain-aware prompts.
 
----
+
 
 ##  Evaluation Summary
 
@@ -99,7 +95,7 @@ We evaluated SoftwareDocBot using:
 
 Result: Our fine-tuned model provided more context-aware and accurate explanations than both baselines in most scenarios.
 
----
+
 
 
 ##  Tech Stack
@@ -108,7 +104,6 @@ Result: Our fine-tuned model provided more context-aware and accurate explanatio
 - `TinyLlama-1.1B-Chat` (fine-tuned)
 - `transformers`, `trl`, `torch`, `fp16` mixed precision
 
----
 
 ##  Target Users
 
