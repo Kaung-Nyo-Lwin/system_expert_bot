@@ -3,6 +3,161 @@ from typing import Dict, List, Set, Tuple, Optional
 import sqlglot
 from sqlglot import expressions as exp
 import networkx as nx
+from collections import defaultdict
+from pyvis.network import Network
+
+
+def parse_schema(sql_file):
+    with open(sql_file, 'r') as f:
+        schema_ddl = f.read()
+
+        # Parse the schema
+        schema = {}
+        for statement in sqlglot.parse(schema_ddl, dialect='mysql'):
+            if isinstance(statement, exp.Create):
+                table_name = statement.find(exp.Table).name
+                schema[table_name] = {
+                    'columns': [],
+                    'primary_keys': [],
+                    'foreign_keys': []
+                }
+                # Extract columns
+                for column_def in statement.find_all(exp.ColumnDef):
+                    column_info = {
+                        'name': column_def.name,
+                        'type': column_def.args['kind'].sql(dialect='mysql'),
+                        'constraints': []
+                    }
+
+                    # Check for constraints
+                    if column_def.args.get('constraints'):
+                        for constraint in column_def.args['constraints']:
+                            column_info['constraints'].append(str(constraint))
+                    schema[table_name]['columns'].append(column_info)
+
+                #Extract primary keys
+                for primary_keys in statement.find_all(exp.PrimaryKey):
+                    for primary_key in primary_keys:
+                        schema[table_name]['primary_keys'].append(primary_key.name)
+
+        
+                #Extract foreign keys
+                for constraint in statement.find_all(exp.Constraint):
+                    constraint_info = {
+                        'name': constraint.name,
+                        'foreign_key': '',
+                        'reference_table': '',
+                        'reference_column': ''
+                    }
+                    for foreign_keys in constraint.find_all(exp.ForeignKey):
+                        constraint_info['foreign_key'] = foreign_keys.expressions[0].name
+                            
+                            
+                    for references in constraint.find_all(exp.Reference):
+                        constraint_info['reference_table'] = str(references.args['this']).split()[0].replace('"', '')
+                        constraint_info['reference_column'] = str(references.args['this']).split()[1].replace('"', '').replace('(', '').replace(')', '')
+                            
+                    schema[table_name]['foreign_keys'].append(constraint_info)       
+                
+    return schema
+
+
+def build_knowledge_graph(schema_dict):
+    """Convert parsed SQL schema into a knowledge graph"""
+    kg = nx.DiGraph()
+    
+    # First pass: create all table and column nodes
+    for table_name, table_info in schema_dict.items():
+        # Add table node
+        kg.add_node(f"table_{table_name}", 
+                   type="table",
+                   name=table_name,
+                   num_columns=len(table_info['columns']))
+        
+        # Add column nodes
+        for col in table_info['columns']:
+            col_id = f"column_{table_name}.{col['name']}"
+            kg.add_node(col_id,
+                       type="column",
+                       name=col['name'],
+                       data_type=col['type'],
+                       nullable=all("NOT NULL" not in c for c in col['constraints']),
+                       is_auto_increment="AUTO_INCREMENT" in col['constraints'],
+                       has_default=any("DEFAULT" in c for c in col['constraints']))
+            
+            # Add BELONGS_TO edge
+            kg.add_edge(col_id, f"table_{table_name}", relation="BELONGS_TO")
+    
+    # Second pass: add constraints and relationships
+    for table_name, table_info in schema_dict.items():
+        # Add primary key relationships
+        for pk in table_info['primary_keys']:
+            col_id = f"column_{table_name}.{pk}"
+            kg.add_edge(col_id, f"table_{table_name}", relation="PRIMARY_KEY_OF")
+        
+        # Add foreign key relationships
+        for fk in table_info['foreign_keys']:
+            if not fk['foreign_key']:  # Skip empty constraints
+                continue
+                
+            src_col = f"column_{table_name}.{fk['foreign_key']}"
+            tgt_table = f"table_{fk['reference_table']}"
+            tgt_col = f"column_{fk['reference_table']}.{fk['reference_column']}"
+            
+            # Add FOREIGN_KEY_TO edge between columns
+            kg.add_edge(src_col, tgt_col, relation="FOREIGN_KEY_TO")
+            
+            # Add REFERENCES edge between tables
+            kg.add_edge(f"table_{table_name}", tgt_table, relation="REFERENCES")
+    
+    return kg
+
+def visualize_kg_interactive(kg, filename='kg.html'):
+    net = Network(notebook=True, directed=True, height="750px", width="100%")
+    
+    # Add nodes
+    for node in kg.nodes():
+        node_data = kg.nodes[node]
+        color = '#9ECAE1' if node_data['type'] == 'table' else '#A1D99B'
+        title = f"Type: {node_data['type']}\nName: {node_data['name']}"
+        
+        if node_data['type'] == 'column':
+            title += f"\nData Type: {node_data['data_type']}\nNullable: {node_data['nullable']}"
+        
+        net.add_node(node, label=node_data['name'], color=color, title=title)
+    
+    # Add edges
+    for src, tgt, data in kg.edges(data=True):
+        edge_attrs = {
+            'BELONGS_TO': {'color': 'gray', 'dashes': False},
+            'PRIMARY_KEY_OF': {'color': 'red', 'dashes': False},
+            'FOREIGN_KEY_TO': {'color': 'blue', 'dashes': False},
+            'REFERENCES': {'color': 'green', 'dashes': True}
+        }
+        net.add_edge(src, tgt, title=data['relation'], **edge_attrs[data['relation']])
+    
+    # Configure physics
+    net.set_options("""
+    {
+      "physics": {
+        "hierarchicalRepulsion": {
+          "centralGravity": 0,
+          "springLength": 200,
+          "springConstant": 0.01,
+          "nodeDistance": 200,
+          "damping": 0.09
+        },
+        "minVelocity": 0.75,
+        "solver": "hierarchicalRepulsion"
+      }
+    }
+    """)
+    
+    net.show(filename)
+    
+
+def save_kg_graphml(kg: nx.DiGraph, filepath: str):
+    nx.write_graphml(kg, filepath)
 
 
 def load_kg_graphml(filepath: str) -> nx.DiGraph:
@@ -371,6 +526,63 @@ def _process_aggregations(kg: nx.DiGraph, query_id: str, components: QueryCompon
                 if col_node in kg:
                     kg.nodes[col_node]["used_in_aggregation"] = kg.nodes[col_node].get("used_in_aggregation", 0) + 1
                     kg.add_edge(query_id, col_node, relation="AGGREGATES")
+                    
+                    
+def visualize_query(kg, query_id):
+    net = Network(notebook=True, directed=True, height="800px", width="100%")
+    
+    # Add query node
+    net.add_node(query_id, label="Query", color="#FFAAAA", shape="box")
+    
+    # Add all directly connected nodes
+    connected_nodes = set(kg.neighbors(query_id))
+    for node in connected_nodes:
+        node_data = kg.nodes[node]
+        
+        if node_data["type"] == "table":
+            net.add_node(node, label=node_data["name"], color="#AAAAFF")
+        elif node_data["type"] == "column":
+            table, col = node.replace("column_", "").split(".")
+            net.add_node(node, label=f"{col}\n({table})", color="#AAFFAA")
+        elif node_data["type"] == "cte":
+            net.add_node(node, label=node_data["name"], color="#FFA500")
+    
+    # Add edges with different styles
+    edge_styles = {
+        "ACCESSES": {"color": "blue"},
+        "REFERENCES": {"color": "green"},
+        "JOINED_WITH": {"color": "red", "dashes": False},
+        "FILTERS_ON": {"color": "purple"},
+        "ORDERS_BY": {"color": "orange"},
+        "AGGREGATES": {"color": "brown"},
+        "DEFINES": {"color": "gray", "dashes": True}
+    }
+    
+    for src, tgt, data in kg.edges(data=True):
+        if src == query_id or tgt == query_id or (src in connected_nodes and tgt in connected_nodes):
+            if data["relation"] in edge_styles:
+                net.add_edge(src, tgt, 
+                            label=data["relation"],
+                            **edge_styles[data["relation"]])
+    
+    # Configure physics for better layout
+    net.set_options("""
+    {
+      "physics": {
+        "hierarchicalRepulsion": {
+          "centralGravity": 0,
+          "springLength": 200,
+          "springConstant": 0.01,
+          "nodeDistance": 200,
+          "damping": 0.09
+        },
+        "minVelocity": 0.75,
+        "solver": "hierarchicalRepulsion"
+      }
+    }
+    """)
+    
+    net.show(f"query_{query_id}.html")
                     
                     
 def extract_query_labels(kg: nx.DiGraph, query_id: str) -> dict:
