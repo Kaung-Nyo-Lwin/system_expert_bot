@@ -1,0 +1,207 @@
+{
+  "query_id": "query_-3929967437157418100",
+  "tables": [
+    {
+      "id": "table_museum",
+      "name": "museum",
+      "access_count": 1
+    },
+    {
+      "id": "table_location",
+      "name": "location",
+      "access_count": 1
+    }
+  ],
+  "columns": [
+    {
+      "id": "column_location.id",
+      "name": "id",
+      "table": "location",
+      "data_type": "BIGINT",
+      "usage_stats": {
+        "in_select": 0,
+        "in_where": 0,
+        "in_joins": 1,
+        "in_order_by": 0,
+        "in_aggregations": 0
+      }
+    },
+    {
+      "id": "column_location.country",
+      "name": "country",
+      "table": "location",
+      "data_type": "VARCHAR(100)",
+      "usage_stats": {
+        "in_select": 0,
+        "in_where": 0,
+        "in_joins": 0,
+        "in_order_by": 0,
+        "in_aggregations": 0
+      }
+    },
+    {
+      "id": "column_location.address",
+      "name": "address",
+      "table": "location",
+      "data_type": "TEXT",
+      "usage_stats": {
+        "in_select": 0,
+        "in_where": 0,
+        "in_joins": 0,
+        "in_order_by": 0,
+        "in_aggregations": 0
+      }
+    },
+    {
+      "id": "column_museum.name",
+      "name": "name",
+      "table": "museum",
+      "data_type": "VARCHAR(255)",
+      "usage_stats": {
+        "in_select": 0,
+        "in_where": 0,
+        "in_joins": 0,
+        "in_order_by": 0,
+        "in_aggregations": 0
+      }
+    },
+    {
+      "id": "column_museum.id",
+      "name": "id",
+      "table": "museum",
+      "data_type": "BIGINT",
+      "usage_stats": {
+        "in_select": 0,
+        "in_where": 0,
+        "in_joins": 0,
+        "in_order_by": 0,
+        "in_aggregations": 0
+      }
+    },
+    {
+      "id": "column_museum.location_id",
+      "name": "location_id",
+      "table": "museum",
+      "data_type": "BIGINT",
+      "usage_stats": {
+        "in_select": 0,
+        "in_where": 0,
+        "in_joins": 1,
+        "in_order_by": 0,
+        "in_aggregations": 0
+      }
+    }
+  ],
+  "ctes": [],
+  "relationships": [
+    {
+      "source": "column_location.id",
+      "target": "table_location",
+      "type": "PRIMARY_KEY_OF",
+      "properties": {}
+    },
+    {
+      "source": "column_location.country",
+      "target": "table_location",
+      "type": "BELONGS_TO",
+      "properties": {}
+    },
+    {
+      "source": "column_location.address",
+      "target": "table_location",
+      "type": "BELONGS_TO",
+      "properties": {}
+    },
+    {
+      "source": "table_museum",
+      "target": "table_location",
+      "type": "JOINED_IN_QUERY",
+      "properties": {
+        "join_type": "JOIN",
+        "query": "query_-3929967437157418100"
+      }
+    },
+    {
+      "source": "column_museum.id",
+      "target": "table_museum",
+      "type": "PRIMARY_KEY_OF",
+      "properties": {}
+    },
+    {
+      "source": "column_museum.location_id",
+      "target": "table_museum",
+      "type": "BELONGS_TO",
+      "properties": {}
+    },
+    {
+      "source": "column_museum.location_id",
+      "target": "column_location.id",
+      "type": "JOINED_WITH",
+      "properties": {
+        "join_type": "JOIN",
+        "query": "query_-3929967437157418100"
+      }
+    },
+    {
+      "source": "column_museum.name",
+      "target": "table_museum",
+      "type": "BELONGS_TO",
+      "properties": {}
+    },
+    {
+      "source": "query_-3929967437157418100",
+      "target": "table_location",
+      "type": "ACCESSES",
+      "properties": {}
+    },
+    {
+      "source": "query_-3929967437157418100",
+      "target": "table_museum",
+      "type": "ACCESSES",
+      "properties": {}
+    },
+    {
+      "source": "query_-3929967437157418100",
+      "target": "column_location.address",
+      "type": "REFERENCES",
+      "properties": {}
+    },
+    {
+      "source": "query_-3929967437157418100",
+      "target": "column_museum.location_id",
+      "type": "REFERENCES",
+      "properties": {}
+    },
+    {
+      "source": "query_-3929967437157418100",
+      "target": "column_museum.id",
+      "type": "REFERENCES",
+      "properties": {}
+    },
+    {
+      "source": "query_-3929967437157418100",
+      "target": "column_location.id",
+      "type": "REFERENCES",
+      "properties": {}
+    },
+    {
+      "source": "query_-3929967437157418100",
+      "target": "column_location.country",
+      "type": "REFERENCES",
+      "properties": {}
+    },
+    {
+      "source": "query_-3929967437157418100",
+      "target": "column_museum.name",
+      "type": "REFERENCES",
+      "properties": {}
+    }
+  ],
+  "query_metadata": {
+    "query_type": "SELECT",
+    "has_aggregations": false,
+    "has_subqueries": false,
+    "has_cte": false,
+    "limit": null
+  }
+}

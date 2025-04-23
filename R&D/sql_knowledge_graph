@@ -1,0 +1,1105 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d7" for="edge" attr.name="relation" attr.type="string"/>
+<key id="d6" for="node" attr.name="has_default" attr.type="boolean"/>
+<key id="d5" for="node" attr.name="is_auto_increment" attr.type="boolean"/>
+<key id="d4" for="node" attr.name="nullable" attr.type="boolean"/>
+<key id="d3" for="node" attr.name="data_type" attr.type="string"/>
+<key id="d2" for="node" attr.name="num_columns" attr.type="long"/>
+<key id="d1" for="node" attr.name="name" attr.type="string"/>
+<key id="d0" for="node" attr.name="type" attr.type="string"/>
+<graph edgedefault="directed"><node id="table_attribute">
+  <data key="d0">table</data>
+  <data key="d1">attribute</data>
+  <data key="d2">7</data>
+</node>
+<node id="column_attribute.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_attribute.object_id">
+  <data key="d0">column</data>
+  <data key="d1">object_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_attribute.artist">
+  <data key="d0">column</data>
+  <data key="d1">artist</data>
+  <data key="d3">VARCHAR(100)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_attribute.art_style">
+  <data key="d0">column</data>
+  <data key="d1">art_style</data>
+  <data key="d3">VARCHAR(100)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_attribute.material">
+  <data key="d0">column</data>
+  <data key="d1">material</data>
+  <data key="d3">VARCHAR(100)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_attribute.created_at">
+  <data key="d0">column</data>
+  <data key="d1">created_at</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_attribute.updated_at">
+  <data key="d0">column</data>
+  <data key="d1">updated_at</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="table_entrance">
+  <data key="d0">table</data>
+  <data key="d1">entrance</data>
+  <data key="d2">10</data>
+</node>
+<node id="column_entrance.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_entrance.museum_id">
+  <data key="d0">column</data>
+  <data key="d1">museum_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_entrance.user_id">
+  <data key="d0">column</data>
+  <data key="d1">user_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_entrance.transaction_id">
+  <data key="d0">column</data>
+  <data key="d1">transaction_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_entrance.ticket_no">
+  <data key="d0">column</data>
+  <data key="d1">ticket_no</data>
+  <data key="d3">VARCHAR(50)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_entrance.price">
+  <data key="d0">column</data>
+  <data key="d1">price</data>
+  <data key="d3">INT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_entrance.ticket_type">
+  <data key="d0">column</data>
+  <data key="d1">ticket_type</data>
+  <data key="d3">TEXT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_entrance.entry_time">
+  <data key="d0">column</data>
+  <data key="d1">entry_time</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_entrance.created_at">
+  <data key="d0">column</data>
+  <data key="d1">created_at</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_entrance.updated_at">
+  <data key="d0">column</data>
+  <data key="d1">updated_at</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="table_keyword">
+  <data key="d0">table</data>
+  <data key="d1">keyword</data>
+  <data key="d2">4</data>
+</node>
+<node id="column_keyword.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_keyword.value">
+  <data key="d0">column</data>
+  <data key="d1">value</data>
+  <data key="d3">VARCHAR(100)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_keyword.created_at">
+  <data key="d0">column</data>
+  <data key="d1">created_at</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_keyword.updated_at">
+  <data key="d0">column</data>
+  <data key="d1">updated_at</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="table_location">
+  <data key="d0">table</data>
+  <data key="d1">location</data>
+  <data key="d2">7</data>
+</node>
+<node id="column_location.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_location.longitude">
+  <data key="d0">column</data>
+  <data key="d1">longitude</data>
+  <data key="d3">DECIMAL(11, 8)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_location.latitude">
+  <data key="d0">column</data>
+  <data key="d1">latitude</data>
+  <data key="d3">DECIMAL(11, 8)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_location.country">
+  <data key="d0">column</data>
+  <data key="d1">country</data>
+  <data key="d3">VARCHAR(100)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_location.address">
+  <data key="d0">column</data>
+  <data key="d1">address</data>
+  <data key="d3">TEXT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_location.created_at">
+  <data key="d0">column</data>
+  <data key="d1">created_at</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_location.updated_at">
+  <data key="d0">column</data>
+  <data key="d1">updated_at</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="table_museum">
+  <data key="d0">table</data>
+  <data key="d1">museum</data>
+  <data key="d2">6</data>
+</node>
+<node id="column_museum.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_museum.location_id">
+  <data key="d0">column</data>
+  <data key="d1">location_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_museum.name">
+  <data key="d0">column</data>
+  <data key="d1">name</data>
+  <data key="d3">VARCHAR(255)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_museum.description">
+  <data key="d0">column</data>
+  <data key="d1">description</data>
+  <data key="d3">TEXT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_museum.created_at">
+  <data key="d0">column</data>
+  <data key="d1">created_at</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_museum.updated_at">
+  <data key="d0">column</data>
+  <data key="d1">updated_at</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="table_museum_keyword">
+  <data key="d0">table</data>
+  <data key="d1">museum_keyword</data>
+  <data key="d2">2</data>
+</node>
+<node id="column_museum_keyword.museum_id">
+  <data key="d0">column</data>
+  <data key="d1">museum_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_museum_keyword.keyword_id">
+  <data key="d0">column</data>
+  <data key="d1">keyword_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="table_museum_object">
+  <data key="d0">table</data>
+  <data key="d1">museum_object</data>
+  <data key="d2">9</data>
+</node>
+<node id="column_museum_object.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_museum_object.museum_id">
+  <data key="d0">column</data>
+  <data key="d1">museum_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_museum_object.country">
+  <data key="d0">column</data>
+  <data key="d1">country</data>
+  <data key="d3">TEXT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_museum_object.title">
+  <data key="d0">column</data>
+  <data key="d1">title</data>
+  <data key="d3">VARCHAR(255)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_museum_object.description">
+  <data key="d0">column</data>
+  <data key="d1">description</data>
+  <data key="d3">TEXT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_museum_object.year">
+  <data key="d0">column</data>
+  <data key="d1">year</data>
+  <data key="d3">INT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_museum_object.image">
+  <data key="d0">column</data>
+  <data key="d1">image</data>
+  <data key="d3">VARCHAR(255)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_museum_object.created_at">
+  <data key="d0">column</data>
+  <data key="d1">created_at</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_museum_object.updated_at">
+  <data key="d0">column</data>
+  <data key="d1">updated_at</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="table_museum_object_keyword">
+  <data key="d0">table</data>
+  <data key="d1">museum_object_keyword</data>
+  <data key="d2">2</data>
+</node>
+<node id="column_museum_object_keyword.object_id">
+  <data key="d0">column</data>
+  <data key="d1">object_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_museum_object_keyword.keyword_id">
+  <data key="d0">column</data>
+  <data key="d1">keyword_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="table_museum_object_type_info">
+  <data key="d0">table</data>
+  <data key="d1">museum_object_type_info</data>
+  <data key="d2">2</data>
+</node>
+<node id="column_museum_object_type_info.object_id">
+  <data key="d0">column</data>
+  <data key="d1">object_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_museum_object_type_info.type_id">
+  <data key="d0">column</data>
+  <data key="d1">type_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="table_museum_type_info">
+  <data key="d0">table</data>
+  <data key="d1">museum_type_info</data>
+  <data key="d2">2</data>
+</node>
+<node id="column_museum_type_info.museum_id">
+  <data key="d0">column</data>
+  <data key="d1">museum_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_museum_type_info.type_id">
+  <data key="d0">column</data>
+  <data key="d1">type_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="table_object_dimension">
+  <data key="d0">table</data>
+  <data key="d1">object_dimension</data>
+  <data key="d2">7</data>
+</node>
+<node id="column_object_dimension.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_object_dimension.object_id">
+  <data key="d0">column</data>
+  <data key="d1">object_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_object_dimension.height">
+  <data key="d0">column</data>
+  <data key="d1">height</data>
+  <data key="d3">DECIMAL(10, 2)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_object_dimension.width">
+  <data key="d0">column</data>
+  <data key="d1">width</data>
+  <data key="d3">DECIMAL(10, 2)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_object_dimension.depth">
+  <data key="d0">column</data>
+  <data key="d1">depth</data>
+  <data key="d3">DECIMAL(10, 2)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_object_dimension.created_at">
+  <data key="d0">column</data>
+  <data key="d1">created_at</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_object_dimension.updated_at">
+  <data key="d0">column</data>
+  <data key="d1">updated_at</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="table_payment">
+  <data key="d0">table</data>
+  <data key="d1">payment</data>
+  <data key="d2">5</data>
+</node>
+<node id="column_payment.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_payment.status">
+  <data key="d0">column</data>
+  <data key="d1">status</data>
+  <data key="d3">VARCHAR(50)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_payment.amount">
+  <data key="d0">column</data>
+  <data key="d1">amount</data>
+  <data key="d3">INT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_payment.created_at">
+  <data key="d0">column</data>
+  <data key="d1">created_at</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_payment.updated_at">
+  <data key="d0">column</data>
+  <data key="d1">updated_at</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="table_type_info">
+  <data key="d0">table</data>
+  <data key="d1">type_info</data>
+  <data key="d2">4</data>
+</node>
+<node id="column_type_info.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_type_info.value">
+  <data key="d0">column</data>
+  <data key="d1">value</data>
+  <data key="d3">VARCHAR(100)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_type_info.created_at">
+  <data key="d0">column</data>
+  <data key="d1">created_at</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_type_info.updated_at">
+  <data key="d0">column</data>
+  <data key="d1">updated_at</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="table_user">
+  <data key="d0">table</data>
+  <data key="d1">user</data>
+  <data key="d2">10</data>
+</node>
+<node id="column_user.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_user.email">
+  <data key="d0">column</data>
+  <data key="d1">email</data>
+  <data key="d3">VARCHAR(100)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_user.username">
+  <data key="d0">column</data>
+  <data key="d1">username</data>
+  <data key="d3">VARCHAR(50)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_user.password">
+  <data key="d0">column</data>
+  <data key="d1">password</data>
+  <data key="d3">VARCHAR(255)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_user.first_name">
+  <data key="d0">column</data>
+  <data key="d1">first_name</data>
+  <data key="d3">VARCHAR(50)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_user.last_name">
+  <data key="d0">column</data>
+  <data key="d1">last_name</data>
+  <data key="d3">VARCHAR(50)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_user.date_of_birth">
+  <data key="d0">column</data>
+  <data key="d1">date_of_birth</data>
+  <data key="d3">DATE</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_user.nationality">
+  <data key="d0">column</data>
+  <data key="d1">nationality</data>
+  <data key="d3">VARCHAR(100)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_user.created_at">
+  <data key="d0">column</data>
+  <data key="d1">created_at</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_user.updated_at">
+  <data key="d0">column</data>
+  <data key="d1">updated_at</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="table_visitor_interaction">
+  <data key="d0">table</data>
+  <data key="d1">visitor_interaction</data>
+  <data key="d2">7</data>
+</node>
+<node id="column_visitor_interaction.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_visitor_interaction.user_id">
+  <data key="d0">column</data>
+  <data key="d1">user_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_visitor_interaction.object_id">
+  <data key="d0">column</data>
+  <data key="d1">object_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_visitor_interaction.is_liked">
+  <data key="d0">column</data>
+  <data key="d1">is_liked</data>
+  <data key="d3">TINYINT(1)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_visitor_interaction.comments">
+  <data key="d0">column</data>
+  <data key="d1">comments</data>
+  <data key="d3">TEXT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_visitor_interaction.created_at">
+  <data key="d0">column</data>
+  <data key="d1">created_at</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_visitor_interaction.updated_at">
+  <data key="d0">column</data>
+  <data key="d1">updated_at</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<edge source="table_attribute" target="table_museum_object">
+  <data key="d7">REFERENCES</data>
+</edge>
+<edge source="column_attribute.id" target="table_attribute">
+  <data key="d7">PRIMARY_KEY_OF</data>
+</edge>
+<edge source="column_attribute.object_id" target="table_attribute">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_attribute.object_id" target="column_museum_object.id">
+  <data key="d7">FOREIGN_KEY_TO</data>
+</edge>
+<edge source="column_attribute.artist" target="table_attribute">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_attribute.art_style" target="table_attribute">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_attribute.material" target="table_attribute">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_attribute.created_at" target="table_attribute">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_attribute.updated_at" target="table_attribute">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="table_entrance" target="table_payment">
+  <data key="d7">REFERENCES</data>
+</edge>
+<edge source="table_entrance" target="table_museum">
+  <data key="d7">REFERENCES</data>
+</edge>
+<edge source="column_entrance.id" target="table_entrance">
+  <data key="d7">PRIMARY_KEY_OF</data>
+</edge>
+<edge source="column_entrance.museum_id" target="table_entrance">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_entrance.museum_id" target="column_museum.id">
+  <data key="d7">FOREIGN_KEY_TO</data>
+</edge>
+<edge source="column_entrance.user_id" target="table_entrance">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_entrance.transaction_id" target="table_entrance">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_entrance.transaction_id" target="column_payment.id">
+  <data key="d7">FOREIGN_KEY_TO</data>
+</edge>
+<edge source="column_entrance.ticket_no" target="table_entrance">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_entrance.price" target="table_entrance">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_entrance.ticket_type" target="table_entrance">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_entrance.entry_time" target="table_entrance">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_entrance.created_at" target="table_entrance">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_entrance.updated_at" target="table_entrance">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_keyword.id" target="table_keyword">
+  <data key="d7">PRIMARY_KEY_OF</data>
+</edge>
+<edge source="column_keyword.value" target="table_keyword">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_keyword.created_at" target="table_keyword">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_keyword.updated_at" target="table_keyword">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_location.id" target="table_location">
+  <data key="d7">PRIMARY_KEY_OF</data>
+</edge>
+<edge source="column_location.longitude" target="table_location">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_location.latitude" target="table_location">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_location.country" target="table_location">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_location.address" target="table_location">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_location.created_at" target="table_location">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_location.updated_at" target="table_location">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="table_museum" target="table_location">
+  <data key="d7">REFERENCES</data>
+</edge>
+<edge source="column_museum.id" target="table_museum">
+  <data key="d7">PRIMARY_KEY_OF</data>
+</edge>
+<edge source="column_museum.location_id" target="table_museum">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_museum.location_id" target="column_location.id">
+  <data key="d7">FOREIGN_KEY_TO</data>
+</edge>
+<edge source="column_museum.name" target="table_museum">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_museum.description" target="table_museum">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_museum.created_at" target="table_museum">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_museum.updated_at" target="table_museum">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="table_museum_keyword" target="table_keyword">
+  <data key="d7">REFERENCES</data>
+</edge>
+<edge source="table_museum_keyword" target="table_museum">
+  <data key="d7">REFERENCES</data>
+</edge>
+<edge source="column_museum_keyword.museum_id" target="table_museum_keyword">
+  <data key="d7">PRIMARY_KEY_OF</data>
+</edge>
+<edge source="column_museum_keyword.museum_id" target="column_museum.id">
+  <data key="d7">FOREIGN_KEY_TO</data>
+</edge>
+<edge source="column_museum_keyword.keyword_id" target="table_museum_keyword">
+  <data key="d7">PRIMARY_KEY_OF</data>
+</edge>
+<edge source="column_museum_keyword.keyword_id" target="column_keyword.id">
+  <data key="d7">FOREIGN_KEY_TO</data>
+</edge>
+<edge source="table_museum_object" target="table_museum">
+  <data key="d7">REFERENCES</data>
+</edge>
+<edge source="column_museum_object.id" target="table_museum_object">
+  <data key="d7">PRIMARY_KEY_OF</data>
+</edge>
+<edge source="column_museum_object.museum_id" target="table_museum_object">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_museum_object.museum_id" target="column_museum.id">
+  <data key="d7">FOREIGN_KEY_TO</data>
+</edge>
+<edge source="column_museum_object.country" target="table_museum_object">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_museum_object.title" target="table_museum_object">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_museum_object.description" target="table_museum_object">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_museum_object.year" target="table_museum_object">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_museum_object.image" target="table_museum_object">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_museum_object.created_at" target="table_museum_object">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_museum_object.updated_at" target="table_museum_object">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="table_museum_object_keyword" target="table_museum_object">
+  <data key="d7">REFERENCES</data>
+</edge>
+<edge source="table_museum_object_keyword" target="table_keyword">
+  <data key="d7">REFERENCES</data>
+</edge>
+<edge source="column_museum_object_keyword.object_id" target="table_museum_object_keyword">
+  <data key="d7">PRIMARY_KEY_OF</data>
+</edge>
+<edge source="column_museum_object_keyword.object_id" target="column_museum_object.id">
+  <data key="d7">FOREIGN_KEY_TO</data>
+</edge>
+<edge source="column_museum_object_keyword.keyword_id" target="table_museum_object_keyword">
+  <data key="d7">PRIMARY_KEY_OF</data>
+</edge>
+<edge source="column_museum_object_keyword.keyword_id" target="column_keyword.id">
+  <data key="d7">FOREIGN_KEY_TO</data>
+</edge>
+<edge source="table_museum_object_type_info" target="table_museum_object">
+  <data key="d7">REFERENCES</data>
+</edge>
+<edge source="table_museum_object_type_info" target="table_type_info">
+  <data key="d7">REFERENCES</data>
+</edge>
+<edge source="column_museum_object_type_info.object_id" target="table_museum_object_type_info">
+  <data key="d7">PRIMARY_KEY_OF</data>
+</edge>
+<edge source="column_museum_object_type_info.object_id" target="column_museum_object.id">
+  <data key="d7">FOREIGN_KEY_TO</data>
+</edge>
+<edge source="column_museum_object_type_info.type_id" target="table_museum_object_type_info">
+  <data key="d7">PRIMARY_KEY_OF</data>
+</edge>
+<edge source="column_museum_object_type_info.type_id" target="column_type_info.id">
+  <data key="d7">FOREIGN_KEY_TO</data>
+</edge>
+<edge source="table_museum_type_info" target="table_museum">
+  <data key="d7">REFERENCES</data>
+</edge>
+<edge source="table_museum_type_info" target="table_type_info">
+  <data key="d7">REFERENCES</data>
+</edge>
+<edge source="column_museum_type_info.museum_id" target="table_museum_type_info">
+  <data key="d7">PRIMARY_KEY_OF</data>
+</edge>
+<edge source="column_museum_type_info.museum_id" target="column_museum.id">
+  <data key="d7">FOREIGN_KEY_TO</data>
+</edge>
+<edge source="column_museum_type_info.type_id" target="table_museum_type_info">
+  <data key="d7">PRIMARY_KEY_OF</data>
+</edge>
+<edge source="column_museum_type_info.type_id" target="column_type_info.id">
+  <data key="d7">FOREIGN_KEY_TO</data>
+</edge>
+<edge source="table_object_dimension" target="table_museum_object">
+  <data key="d7">REFERENCES</data>
+</edge>
+<edge source="column_object_dimension.id" target="table_object_dimension">
+  <data key="d7">PRIMARY_KEY_OF</data>
+</edge>
+<edge source="column_object_dimension.object_id" target="table_object_dimension">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_object_dimension.object_id" target="column_museum_object.id">
+  <data key="d7">FOREIGN_KEY_TO</data>
+</edge>
+<edge source="column_object_dimension.height" target="table_object_dimension">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_object_dimension.width" target="table_object_dimension">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_object_dimension.depth" target="table_object_dimension">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_object_dimension.created_at" target="table_object_dimension">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_object_dimension.updated_at" target="table_object_dimension">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_payment.id" target="table_payment">
+  <data key="d7">PRIMARY_KEY_OF</data>
+</edge>
+<edge source="column_payment.status" target="table_payment">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_payment.amount" target="table_payment">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_payment.created_at" target="table_payment">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_payment.updated_at" target="table_payment">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_type_info.id" target="table_type_info">
+  <data key="d7">PRIMARY_KEY_OF</data>
+</edge>
+<edge source="column_type_info.value" target="table_type_info">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_type_info.created_at" target="table_type_info">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_type_info.updated_at" target="table_type_info">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_user.id" target="table_user">
+  <data key="d7">PRIMARY_KEY_OF</data>
+</edge>
+<edge source="column_user.email" target="table_user">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_user.username" target="table_user">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_user.password" target="table_user">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_user.first_name" target="table_user">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_user.last_name" target="table_user">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_user.date_of_birth" target="table_user">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_user.nationality" target="table_user">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_user.created_at" target="table_user">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_user.updated_at" target="table_user">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="table_visitor_interaction" target="table_museum_object">
+  <data key="d7">REFERENCES</data>
+</edge>
+<edge source="table_visitor_interaction" target="table_user">
+  <data key="d7">REFERENCES</data>
+</edge>
+<edge source="column_visitor_interaction.id" target="table_visitor_interaction">
+  <data key="d7">PRIMARY_KEY_OF</data>
+</edge>
+<edge source="column_visitor_interaction.user_id" target="table_visitor_interaction">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_visitor_interaction.user_id" target="column_user.id">
+  <data key="d7">FOREIGN_KEY_TO</data>
+</edge>
+<edge source="column_visitor_interaction.object_id" target="table_visitor_interaction">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_visitor_interaction.object_id" target="column_museum_object.id">
+  <data key="d7">FOREIGN_KEY_TO</data>
+</edge>
+<edge source="column_visitor_interaction.is_liked" target="table_visitor_interaction">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_visitor_interaction.comments" target="table_visitor_interaction">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_visitor_interaction.created_at" target="table_visitor_interaction">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_visitor_interaction.updated_at" target="table_visitor_interaction">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+</graph></graphml>
