@@ -1,0 +1,886 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d7" for="edge" attr.name="relation" attr.type="string"/>
+<key id="d6" for="node" attr.name="has_default" attr.type="boolean"/>
+<key id="d5" for="node" attr.name="is_auto_increment" attr.type="boolean"/>
+<key id="d4" for="node" attr.name="nullable" attr.type="boolean"/>
+<key id="d3" for="node" attr.name="data_type" attr.type="string"/>
+<key id="d2" for="node" attr.name="num_columns" attr.type="long"/>
+<key id="d1" for="node" attr.name="name" attr.type="string"/>
+<key id="d0" for="node" attr.name="type" attr.type="string"/>
+<graph edgedefault="directed"><node id="table_OurSpace">
+  <data key="d0">table</data>
+  <data key="d1">OurSpace</data>
+  <data key="d2">0</data>
+</node>
+<node id="table_user">
+  <data key="d0">table</data>
+  <data key="d1">user</data>
+  <data key="d2">11</data>
+</node>
+<node id="column_user.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">INT</data>
+  <data key="d4">True</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_user.name">
+  <data key="d0">column</data>
+  <data key="d1">name</data>
+  <data key="d3">VARCHAR(255)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_user.email">
+  <data key="d0">column</data>
+  <data key="d1">email</data>
+  <data key="d3">VARCHAR(255)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_user.phone">
+  <data key="d0">column</data>
+  <data key="d1">phone</data>
+  <data key="d3">VARCHAR(15)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_user.address">
+  <data key="d0">column</data>
+  <data key="d1">address</data>
+  <data key="d3">VARCHAR(500)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_user.preferedRange">
+  <data key="d0">column</data>
+  <data key="d1">preferedRange</data>
+  <data key="d3">FLOAT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_user.isCustomer">
+  <data key="d0">column</data>
+  <data key="d1">isCustomer</data>
+  <data key="d3">BOOLEAN</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_user.isOwner">
+  <data key="d0">column</data>
+  <data key="d1">isOwner</data>
+  <data key="d3">BOOLEAN</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_user.rating">
+  <data key="d0">column</data>
+  <data key="d1">rating</data>
+  <data key="d3">FLOAT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_user.createdAt">
+  <data key="d0">column</data>
+  <data key="d1">createdAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_user.updatedAt">
+  <data key="d0">column</data>
+  <data key="d1">updatedAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="table_facility">
+  <data key="d0">table</data>
+  <data key="d1">facility</data>
+  <data key="d2">11</data>
+</node>
+<node id="column_facility.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">INT</data>
+  <data key="d4">True</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_facility.ac">
+  <data key="d0">column</data>
+  <data key="d1">ac</data>
+  <data key="d3">INT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_facility.chair">
+  <data key="d0">column</data>
+  <data key="d1">chair</data>
+  <data key="d3">INT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_facility.tables">
+  <data key="d0">column</data>
+  <data key="d1">tables</data>
+  <data key="d3">INT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_facility.fan">
+  <data key="d0">column</data>
+  <data key="d1">fan</data>
+  <data key="d3">INT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_facility.toilet">
+  <data key="d0">column</data>
+  <data key="d1">toilet</data>
+  <data key="d3">INT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_facility.kitchen">
+  <data key="d0">column</data>
+  <data key="d1">kitchen</data>
+  <data key="d3">BOOLEAN</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_facility.bed">
+  <data key="d0">column</data>
+  <data key="d1">bed</data>
+  <data key="d3">INT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_facility.others">
+  <data key="d0">column</data>
+  <data key="d1">others</data>
+  <data key="d3">TEXT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_facility.createdAt">
+  <data key="d0">column</data>
+  <data key="d1">createdAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_facility.updatedAt">
+  <data key="d0">column</data>
+  <data key="d1">updatedAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="table_space">
+  <data key="d0">table</data>
+  <data key="d1">space</data>
+  <data key="d2">18</data>
+</node>
+<node id="column_space.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">INT</data>
+  <data key="d4">True</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_space.name">
+  <data key="d0">column</data>
+  <data key="d1">name</data>
+  <data key="d3">VARCHAR(255)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_space.oid">
+  <data key="d0">column</data>
+  <data key="d1">oid</data>
+  <data key="d3">INT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_space.location">
+  <data key="d0">column</data>
+  <data key="d1">location</data>
+  <data key="d3">VARCHAR(100)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_space.address">
+  <data key="d0">column</data>
+  <data key="d1">address</data>
+  <data key="d3">VARCHAR(500)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_space.size">
+  <data key="d0">column</data>
+  <data key="d1">size</data>
+  <data key="d3">FLOAT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_space.numRooms">
+  <data key="d0">column</data>
+  <data key="d1">numRooms</data>
+  <data key="d3">INT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_space.fid">
+  <data key="d0">column</data>
+  <data key="d1">fid</data>
+  <data key="d3">INT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_space.hourlyRate">
+  <data key="d0">column</data>
+  <data key="d1">hourlyRate</data>
+  <data key="d3">FLOAT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_space.halfdayRate">
+  <data key="d0">column</data>
+  <data key="d1">halfdayRate</data>
+  <data key="d3">FLOAT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_space.fulldayRate">
+  <data key="d0">column</data>
+  <data key="d1">fulldayRate</data>
+  <data key="d3">FLOAT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_space.rating">
+  <data key="d0">column</data>
+  <data key="d1">rating</data>
+  <data key="d3">FLOAT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_space.rentFrom">
+  <data key="d0">column</data>
+  <data key="d1">rentFrom</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_space.rentTo">
+  <data key="d0">column</data>
+  <data key="d1">rentTo</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_space.status">
+  <data key="d0">column</data>
+  <data key="d1">status</data>
+  <data key="d3">ENUM('open', 'closed')</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_space.remark">
+  <data key="d0">column</data>
+  <data key="d1">remark</data>
+  <data key="d3">TEXT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_space.createdAt">
+  <data key="d0">column</data>
+  <data key="d1">createdAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_space.updatedAt">
+  <data key="d0">column</data>
+  <data key="d1">updatedAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="table_feedback">
+  <data key="d0">table</data>
+  <data key="d1">feedback</data>
+  <data key="d2">6</data>
+</node>
+<node id="column_feedback.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">INT</data>
+  <data key="d4">True</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_feedback.cid">
+  <data key="d0">column</data>
+  <data key="d1">cid</data>
+  <data key="d3">INT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_feedback.sid">
+  <data key="d0">column</data>
+  <data key="d1">sid</data>
+  <data key="d3">INT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_feedback.reviews">
+  <data key="d0">column</data>
+  <data key="d1">reviews</data>
+  <data key="d3">TEXT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_feedback.rating">
+  <data key="d0">column</data>
+  <data key="d1">rating</data>
+  <data key="d3">FLOAT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_feedback.createdAt">
+  <data key="d0">column</data>
+  <data key="d1">createdAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="table_booking">
+  <data key="d0">table</data>
+  <data key="d1">booking</data>
+  <data key="d2">15</data>
+</node>
+<node id="column_booking.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">INT</data>
+  <data key="d4">True</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_booking.cid">
+  <data key="d0">column</data>
+  <data key="d1">cid</data>
+  <data key="d3">INT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_booking.sid">
+  <data key="d0">column</data>
+  <data key="d1">sid</data>
+  <data key="d3">INT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_booking.bookingDate">
+  <data key="d0">column</data>
+  <data key="d1">bookingDate</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_booking.totalDuration">
+  <data key="d0">column</data>
+  <data key="d1">totalDuration</data>
+  <data key="d3">TIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_booking.startTime">
+  <data key="d0">column</data>
+  <data key="d1">startTime</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_booking.endTime">
+  <data key="d0">column</data>
+  <data key="d1">endTime</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_booking.discount">
+  <data key="d0">column</data>
+  <data key="d1">discount</data>
+  <data key="d3">FLOAT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_booking.spacePrice">
+  <data key="d0">column</data>
+  <data key="d1">spacePrice</data>
+  <data key="d3">FLOAT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_booking.sysFee">
+  <data key="d0">column</data>
+  <data key="d1">sysFee</data>
+  <data key="d3">FLOAT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_booking.total">
+  <data key="d0">column</data>
+  <data key="d1">total</data>
+  <data key="d3">FLOAT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_booking.status">
+  <data key="d0">column</data>
+  <data key="d1">status</data>
+  <data key="d3">ENUM('available', 'booked', 'cancelled', 'completed')</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_booking.remark">
+  <data key="d0">column</data>
+  <data key="d1">remark</data>
+  <data key="d3">TEXT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_booking.createdAt">
+  <data key="d0">column</data>
+  <data key="d1">createdAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_booking.updatedAt">
+  <data key="d0">column</data>
+  <data key="d1">updatedAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="table_rent">
+  <data key="d0">table</data>
+  <data key="d1">rent</data>
+  <data key="d2">4</data>
+</node>
+<node id="column_rent.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">INT</data>
+  <data key="d4">True</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_rent.bid">
+  <data key="d0">column</data>
+  <data key="d1">bid</data>
+  <data key="d3">INT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_rent.createdAt">
+  <data key="d0">column</data>
+  <data key="d1">createdAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_rent.updatedAt">
+  <data key="d0">column</data>
+  <data key="d1">updatedAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="table_payment">
+  <data key="d0">table</data>
+  <data key="d1">payment</data>
+  <data key="d2">11</data>
+</node>
+<node id="column_payment.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">INT</data>
+  <data key="d4">True</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_payment.rid">
+  <data key="d0">column</data>
+  <data key="d1">rid</data>
+  <data key="d3">INT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_payment.bid">
+  <data key="d0">column</data>
+  <data key="d1">bid</data>
+  <data key="d3">INT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_payment.amountToPay">
+  <data key="d0">column</data>
+  <data key="d1">amountToPay</data>
+  <data key="d3">FLOAT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_payment.paid">
+  <data key="d0">column</data>
+  <data key="d1">paid</data>
+  <data key="d3">FLOAT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_payment.unpaid">
+  <data key="d0">column</data>
+  <data key="d1">unpaid</data>
+  <data key="d3">FLOAT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_payment.transacId">
+  <data key="d0">column</data>
+  <data key="d1">transacId</data>
+  <data key="d3">VARCHAR(200)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_payment.bank">
+  <data key="d0">column</data>
+  <data key="d1">bank</data>
+  <data key="d3">VARCHAR(200)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_payment.status">
+  <data key="d0">column</data>
+  <data key="d1">status</data>
+  <data key="d3">ENUM('pending', 'completed', 'refunded', 'cancelled')</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_payment.createdAt">
+  <data key="d0">column</data>
+  <data key="d1">createdAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_payment.updatedAt">
+  <data key="d0">column</data>
+  <data key="d1">updatedAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<edge source="column_user.id" target="table_user">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_user.name" target="table_user">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_user.email" target="table_user">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_user.phone" target="table_user">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_user.address" target="table_user">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_user.preferedRange" target="table_user">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_user.isCustomer" target="table_user">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_user.isOwner" target="table_user">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_user.rating" target="table_user">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_user.createdAt" target="table_user">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_user.updatedAt" target="table_user">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_facility.id" target="table_facility">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_facility.ac" target="table_facility">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_facility.chair" target="table_facility">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_facility.tables" target="table_facility">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_facility.fan" target="table_facility">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_facility.toilet" target="table_facility">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_facility.kitchen" target="table_facility">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_facility.bed" target="table_facility">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_facility.others" target="table_facility">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_facility.createdAt" target="table_facility">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_facility.updatedAt" target="table_facility">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_space.id" target="table_space">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_space.name" target="table_space">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_space.oid" target="table_space">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_space.location" target="table_space">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_space.address" target="table_space">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_space.size" target="table_space">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_space.numRooms" target="table_space">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_space.fid" target="table_space">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_space.hourlyRate" target="table_space">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_space.halfdayRate" target="table_space">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_space.fulldayRate" target="table_space">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_space.rating" target="table_space">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_space.rentFrom" target="table_space">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_space.rentTo" target="table_space">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_space.status" target="table_space">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_space.remark" target="table_space">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_space.createdAt" target="table_space">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_space.updatedAt" target="table_space">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_feedback.id" target="table_feedback">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_feedback.cid" target="table_feedback">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_feedback.sid" target="table_feedback">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_feedback.reviews" target="table_feedback">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_feedback.rating" target="table_feedback">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_feedback.createdAt" target="table_feedback">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_booking.id" target="table_booking">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_booking.cid" target="table_booking">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_booking.sid" target="table_booking">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_booking.bookingDate" target="table_booking">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_booking.totalDuration" target="table_booking">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_booking.startTime" target="table_booking">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_booking.endTime" target="table_booking">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_booking.discount" target="table_booking">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_booking.spacePrice" target="table_booking">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_booking.sysFee" target="table_booking">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_booking.total" target="table_booking">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_booking.status" target="table_booking">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_booking.remark" target="table_booking">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_booking.createdAt" target="table_booking">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_booking.updatedAt" target="table_booking">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_rent.id" target="table_rent">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_rent.bid" target="table_rent">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_rent.createdAt" target="table_rent">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_rent.updatedAt" target="table_rent">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_payment.id" target="table_payment">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_payment.rid" target="table_payment">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_payment.bid" target="table_payment">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_payment.amountToPay" target="table_payment">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_payment.paid" target="table_payment">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_payment.unpaid" target="table_payment">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_payment.transacId" target="table_payment">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_payment.bank" target="table_payment">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_payment.status" target="table_payment">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_payment.createdAt" target="table_payment">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_payment.updatedAt" target="table_payment">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+</graph></graphml>
