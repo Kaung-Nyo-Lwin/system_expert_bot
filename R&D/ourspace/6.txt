@@ -1,0 +1,51 @@
+**SQL Procedure Analysis: `sp_RangeBook`**
+=====================================================
+
+### 1. Overview
+The `sp_RangeBook` SQL procedure is designed to generate ranges of hourly rates for spaces in the `space` table and then calculate the total number of bookings, rental amount, and system fee for each defined range.
+
+### 2. Input
+The procedure takes three input parameters:
+
+* `lowLimit`: The lower limit of the hourly rate range (FLOAT)
+* `highLimit`: The upper limit of the hourly rate range (FLOAT)
+* `steps`: The increment value for the hourly rate range (INT)
+
+### 3. Output
+The procedure returns a result set with the following columns:
+
+* `Ranges of Hourly Rate`: The defined range of hourly rates (NVARCHAR(200))
+* `Total Number of Bookings`: The total number of bookings for each defined range (INT)
+* `Rental Amount`: The total rental amount for each defined range (FLOAT)
+* `System Fee`: The total system fee for each defined range (FLOAT)
+
+### 4. Tables
+The procedure uses the following tables:
+
+* `space`: The table containing information about spaces, including their hourly rates.
+* `booking`: The table containing information about bookings, including their status, space ID, and rental amount.
+
+### 5. Logic
+The procedure follows these steps:
+
+1. Creates a temporary table `spacetem` to store the hourly rates from the `space` table.
+2. Inserts the hourly rates from the `space` table into the temporary table `spacetem`.
+3. Uses a WHILE loop to iterate over the hourly rate range, updating the `definedRange` column in the temporary table `spacetem` for each range.
+4. Joins the `booking` table with the temporary table `spacetem` on the space ID and filters the bookings by status (`completed` or `booked`).
+5. Groups the joined result set by the defined range and calculates the total number of bookings, rental amount, and system fee for each range.
+6. Drops the temporary table `spacetem` and the result set is returned.
+
+### 6. Operations
+The procedure performs the following operations:
+
+* Read: `SELECT` statements to retrieve data from the `space` and `booking` tables.
+* Write: `INSERT` statement to insert data into the temporary table `spacetem`.
+* Update: `UPDATE` statement to update the `definedRange` column in the temporary table `spacetem`.
+* Delete: `DROP` statement to drop the temporary table `spacetem` and the result set.
+
+### 7. Use Case
+The `sp_RangeBook` procedure can be used in the following scenarios:
+
+* To generate ranges of hourly rates for spaces and calculate the total number of bookings, rental amount, and system fee for each range.
+* To analyze the booking patterns and revenue for spaces with different hourly rates.
+* To identify the most profitable ranges of hourly rates and optimize pricing strategies accordingly.

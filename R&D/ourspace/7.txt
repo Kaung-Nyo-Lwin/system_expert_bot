@@ -1,0 +1,62 @@
+**SQL Procedure Analysis: `sp_SpaceRecommend`**
+=====================================================
+
+### 1. Overview
+The `sp_SpaceRecommend` SQL procedure is designed to recommend available spaces to a user based on their preferred price range, location, and availability. It takes into account the user's booking history and space ratings to provide a list of recommended spaces.
+
+### 2. Input
+The procedure takes the following input parameters:
+
+* `uid`: The ID of the user (INT)
+* `location`: The location where the user is searching for spaces (VARCHAR(100))
+* `startTime`: The start time of the search period (TIMESTAMP)
+* `endTime`: The end time of the search period (TIMESTAMP)
+* `priceVariation`: The variation in price from the user's preferred range (FLOAT)
+
+### 3. Output
+The procedure returns a list of recommended spaces, including:
+
+* `Space Name`: The name of the space (VARCHAR)
+* `hourlyRate`: The hourly rate of the space (FLOAT)
+* `halfdayRate`: The half-day rate of the space (FLOAT)
+* `fulldayRate`: The full-day rate of the space (FLOAT)
+* `rating`: The rating of the space (FLOAT)
+
+### 4. Tables
+The procedure uses the following tables:
+
+* `user`: The user table, which contains information about the user's preferred price range.
+* `space`: The space table, which contains information about available spaces.
+* `booking`: The booking table, which contains information about bookings made by the user.
+
+### 5. Logic
+The procedure follows these steps:
+
+1. Retrieve the user's preferred price range from the `user` table.
+2. Calculate the upper and lower limits of the price range based on the user's preferred range and the `priceVariation` input parameter.
+3. Retrieve available spaces that match the user's location and price range.
+4. Filter out spaces that are fully booked during the search period.
+5. Join the available spaces with the user's booking history to determine the number of bookings for each space.
+6. Order the recommended spaces based on the number of bookings and space ratings.
+7. Return the top 10 recommended spaces.
+
+### 6. Operations
+The procedure performs the following operations:
+
+* Read: Retrieves data from the `user`, `space`, and `booking` tables.
+* Write: None
+* Update: None
+* Delete: None
+
+### 7. Use Case
+The `sp_SpaceRecommend` procedure can be used in the following scenarios:
+
+* A user searches for available spaces in a specific location and price range.
+* The procedure returns a list of recommended spaces based on the user's booking history and space ratings.
+* The user can select a recommended space to book, and the procedure can be used to update the booking information.
+
+**Example Use Case:**
+```sql
+CALL sp_SpaceRecommend(1, 'Downtown', '2025-02-12 10:00:00', '2025-02-12 13:00:00', 10);
+```
+This call recommends available spaces in the "Downtown" location with a price range variation of 10% from the user's preferred range. The procedure returns a list of recommended spaces, including their hourly rates, half-day rates, full-day rates, and ratings.

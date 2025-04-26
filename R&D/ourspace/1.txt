@@ -1,0 +1,60 @@
+**SQL Procedure Analysis: `sp_BookSpace`**
+=====================================================
+
+### 1. Overview
+The `sp_BookSpace` SQL procedure is designed to book a space in a database for a specific customer. It takes in several parameters, including the customer ID, space ID, start and end times, booking date, and a remark. The procedure calculates the total price based on the duration of the booking and inserts a new record into the `booking` table.
+
+### 2. Input
+The input parameters for the `sp_BookSpace` procedure are:
+
+* `cid`: The ID of the customer booking the space (INT)
+* `sid`: The ID of the space being booked (INT)
+* `startTime`: The start time of the booking (TIMESTAMP)
+* `endTime`: The end time of the booking (TIMESTAMP)
+* `bookingDate`: The date the booking is made (TIMESTAMP)
+* `remark`: A text field for any additional remarks or comments (TEXT)
+
+### 3. Output
+The expected output of the `sp_BookSpace` procedure is a new record inserted into the `booking` table with the following columns:
+
+* `cid`: The ID of the customer booking the space
+* `sid`: The ID of the space being booked
+* `bookingDate`: The date the booking is made
+* `totalDuration`: The total duration of the booking in hours
+* `startTime`: The start time of the booking
+* `endTime`: The end time of the booking
+* `spacePrice`: The total price of the booking
+* `status`: The status of the booking (initially set to 'booked')
+* `remark`: The text field for any additional remarks or comments
+* `createdAt` and `updatedAt`: Timestamps for when the record was created and last updated
+
+### 4. Tables
+The `sp_BookSpace` procedure uses the following tables:
+
+* `space`: A table containing information about available spaces, including their hourly rate, half-day rate, and full-day rate.
+* `booking`: A table containing information about bookings, including the customer ID, space ID, booking date, start and end times, total price, status, and remarks.
+
+### 5. Logic
+The logic of the `sp_BookSpace` procedure is as follows:
+
+1. Calculate the duration of the booking in hours using the `TIMESTAMPDIFF` function.
+2. Determine the price of the booking based on the duration:
+	* If the duration is less than 12 hours, the price is calculated as the hourly rate multiplied by the duration.
+	* If the duration is between 12 and 24 hours, the price is calculated as the hourly rate multiplied by the duration minus 12 hours, plus the half-day rate.
+	* If the duration is more than 24 hours, the price is calculated as the full-day rate multiplied by the duration.
+3. Set the status of the booking to 'booked'.
+4. Insert a new record into the `booking` table with the calculated price and other relevant information.
+
+### 6. Operations
+The `sp_BookSpace` procedure performs the following operations:
+
+* Read: Reads data from the `space` table to calculate the price of the booking.
+* Write: Inserts a new record into the `booking` table.
+* Update: Updates the `status` column of the new record in the `booking` table to 'booked'.
+
+### 7. Use Case
+The `sp_BookSpace` procedure can be used in the following use cases:
+
+* Booking a space for a customer: Call the procedure with the customer ID, space ID, start and end times, booking date, and remark.
+* Updating the status of a booking: Update the `status` column of the corresponding record in the `booking` table.
+* Retrieving booking information: Query the `booking` table to retrieve information about a specific booking.

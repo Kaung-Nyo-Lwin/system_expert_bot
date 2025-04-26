@@ -1,0 +1,52 @@
+**SQL Procedure Analysis: `sp_MonthlyRevenue`**
+=====================================================
+
+### 1. Overview
+The `sp_MonthlyRevenue` SQL procedure calculates the monthly revenue for a given date range. It takes two input parameters: `FromDate` and `ToDate`, representing the start and end dates of the period for which the revenue is to be calculated.
+
+### 2. Input
+The input parameters for the procedure are:
+
+* `FromDate`: A `DATETIME` value representing the start date of the period.
+* `ToDate`: A `DATETIME` value representing the end date of the period.
+
+### 3. Output
+The expected output of the procedure is a list of monthly revenues for the given date range, including:
+
+* `Month`: The name of the month.
+* `Year`: The year.
+* `Space Price`: The total space price for the month.
+* `Platform Fee`: The total platform fee for the month.
+* `Total`: The total revenue for the month.
+
+### 4. Tables
+The procedure uses the following tables:
+
+* `booking`: A table containing information about bookings.
+* `rent`: A table containing information about rents.
+
+### 5. Logic
+The procedure uses the following logic:
+
+1. It selects the `Month`, `Year`, `spacePrice`, `sysFee`, and `total` columns from the `booking` table, joined with the `rent` table on the `bid` column.
+2. It filters the results to include only bookings with a status of 'completed' and an end time between the `FromDate` and `ToDate` parameters.
+3. It groups the results by `Month` and `Year`.
+4. It calculates the total space price, platform fee, and total revenue for each month by summing the corresponding columns.
+
+### 6. Operations
+The procedure performs the following operations:
+
+* `SELECT`: Retrieves data from the `booking` and `rent` tables.
+* `INNER JOIN`: Combines data from the `booking` and `rent` tables based on the `bid` column.
+* `WHERE`: Filters the results to include only bookings with a status of 'completed' and an end time between the `FromDate` and `ToDate` parameters.
+* `GROUP BY`: Groups the results by `Month` and `Year`.
+* `SUM`: Calculates the total space price, platform fee, and total revenue for each month.
+
+### 7. Use Case
+The use case for this procedure is to calculate the monthly revenue for a given date range. For example, to calculate the monthly revenue for the year 2025, you would call the procedure with the following parameters:
+
+```sql
+CALL sp_MonthlyRevenue('2025-01-01', '2025-12-31');
+```
+
+This would return a list of monthly revenues for the year 2025, including the total space price, platform fee, and total revenue for each month.
