@@ -1,0 +1,57 @@
+**SQL Procedure Analysis: `sp_MostSpender`**
+=====================================================
+
+### 1. Overview
+The `sp_MostSpender` SQL procedure is designed to identify the top `NumUsers` users who have spent the most amount on the platform within a specified date range (`FromDate` to `ToDate`). The procedure returns the user's name, days on the platform, total spent amount, and average spent amount per day.
+
+### 2. Input
+The procedure takes three input parameters:
+
+* `FromDate`: The start date of the date range (DATETIME)
+* `ToDate`: The end date of the date range (DATETIME)
+* `NumUsers`: The number of top users to return (INT)
+
+### 3. Output
+The procedure returns a result set with the following columns:
+
+* `User Name`: The name of the user
+* `Days On Platform`: The number of days the user has been on the platform (or 1 if the user joined on the current date)
+* `Total Spent Amount`: The total amount spent by the user
+* `Average Spent Amount Per Day`: The average amount spent by the user per day
+
+### 4. Tables
+The procedure uses the following tables:
+
+* `payment` (p)
+* `booking` (b)
+* `user` (u)
+
+### 5. Logic
+The procedure uses the following logic:
+
+1. It first selects the total amount spent by each user within the specified date range, grouping by user name and creation date.
+2. It then selects the top `NumUsers` users with the highest total amount spent, ordering the result set in descending order.
+3. For each user, it calculates the average spent amount per day by dividing the total amount spent by the number of days the user has been on the platform (or 1 if the user joined on the current date).
+
+### 6. Operations
+The procedure performs the following operations:
+
+* `SELECT`: Retrieves data from the `payment`, `booking`, and `user` tables.
+* `GROUP BY`: Groups the result set by user name and creation date.
+* `ORDER BY`: Orders the result set in descending order by total amount spent.
+* `LIMIT`: Limits the result set to the top `NumUsers` users.
+* `CASE`: Calculates the number of days the user has been on the platform and the average spent amount per day.
+
+### 7. Use Case
+The `sp_MostSpender` procedure can be used in the following scenarios:
+
+* Identifying the top spenders on the platform within a specific date range.
+* Analyzing user behavior and spending patterns.
+* Creating targeted marketing campaigns for high-value users.
+* Optimizing pricing strategies based on user spending habits.
+
+**Example Use Case:**
+```sql
+CALL sp_MostSpender('2022-01-01', '2022-12-31', 10);
+```
+This would return the top 10 users who spent the most amount on the platform within the year 2022.

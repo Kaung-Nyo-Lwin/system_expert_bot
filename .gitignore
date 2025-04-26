@@ -1,0 +1,15 @@
+# .gitignore
+# Ignore all .pyc files
+*.pyc
+
+# Ignore __pycache__ folders
+__pycache__/
+*/__pycache__/
+
+# Ignore node_modules everywhere
+node_modules/
+app/frontend/node_modules/
+
+# Also for backend cache
+app/backend/__pycache__/
+app/backend/*.pyc

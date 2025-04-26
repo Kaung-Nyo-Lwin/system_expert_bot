@@ -1,0 +1,53 @@
+**SQL Procedure Analysis: `sp_UserRegistration`**
+=====================================================
+
+### 1. Overview
+The `sp_UserRegistration` SQL procedure is designed to register a new user in the `user` table. It takes in various user details such as name, email, phone number, address, preferred range, customer status, owner status, rating, creation date, and update date.
+
+### 2. Input
+The procedure takes in the following input parameters:
+
+| Parameter Name | Data Type | Description |
+| --- | --- | --- |
+| `name` | `VARCHAR(255)` | User's name |
+| `email` | `VARCHAR(255)` | User's email address |
+| `phone` | `VARCHAR(15)` | User's phone number |
+| `address` | `VARCHAR(500)` | User's address |
+| `preferedRange` | `FLOAT` | User's preferred range |
+| `isCustomer` | `BOOLEAN` | User's customer status |
+| `isOwner` | `BOOLEAN` | User's owner status |
+| `rating` | `FLOAT` | User's rating |
+| `createdAt` | `TIMESTAMP` | Timestamp when the user was created |
+| `updatedAt` | `TIMESTAMP` | Timestamp when the user was last updated |
+
+### 3. Output
+The procedure does not return any output values. It simply inserts a new user record into the `user` table.
+
+### 4. Tables
+The procedure uses the following table:
+
+| Table Name | Description |
+| --- | --- |
+| `user` | Table to store user information |
+
+### 5. Logic
+The procedure inserts a new user record into the `user` table using the provided input parameters. The logic is straightforward, with each input parameter being used to populate the corresponding column in the `user` table.
+
+### 6. Operations
+The procedure performs the following operations:
+
+* `INSERT`: Inserts a new user record into the `user` table.
+
+### 7. Use Case
+The `sp_UserRegistration` procedure can be used in the following scenarios:
+
+* When a new user signs up for an application or website, this procedure can be called to create a new user record in the database.
+* When a user's information needs to be updated, this procedure can be modified to update the existing user record instead of inserting a new one.
+
+**Example Use Case:**
+```sql
+CALL sp_UserRegistration('Marc K','marck@gmail.com','+6611188889','ait',1000,TRUE,FALSE,NULL,now(),NULL);
+```
+This would create a new user record in the `user` table with the provided details.
+
+**Note:** The procedure does not handle any potential errors that may occur during the insertion process. In a real-world scenario, you would want to add error handling to ensure that the procedure behaves correctly in case of errors.

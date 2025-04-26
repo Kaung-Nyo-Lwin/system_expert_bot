@@ -1,0 +1,1474 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d7" for="edge" attr.name="relation" attr.type="string"/>
+<key id="d6" for="node" attr.name="has_default" attr.type="boolean"/>
+<key id="d5" for="node" attr.name="is_auto_increment" attr.type="boolean"/>
+<key id="d4" for="node" attr.name="nullable" attr.type="boolean"/>
+<key id="d3" for="node" attr.name="data_type" attr.type="string"/>
+<key id="d2" for="node" attr.name="num_columns" attr.type="long"/>
+<key id="d1" for="node" attr.name="name" attr.type="string"/>
+<key id="d0" for="node" attr.name="type" attr.type="string"/>
+<graph edgedefault="directed"><node id="table_Location">
+  <data key="d0">table</data>
+  <data key="d1">Location</data>
+  <data key="d2">4</data>
+</node>
+<node id="column_Location.zip_code">
+  <data key="d0">column</data>
+  <data key="d1">zip_code</data>
+  <data key="d3">VARCHAR(10)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Location.country">
+  <data key="d0">column</data>
+  <data key="d1">country</data>
+  <data key="d3">VARCHAR(100)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Location.createdAt">
+  <data key="d0">column</data>
+  <data key="d1">createdAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_Location.updatedAt">
+  <data key="d0">column</data>
+  <data key="d1">updatedAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="table_User">
+  <data key="d0">table</data>
+  <data key="d1">User</data>
+  <data key="d2">8</data>
+</node>
+<node id="column_User.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_User.full_name">
+  <data key="d0">column</data>
+  <data key="d1">full_name</data>
+  <data key="d3">VARCHAR(100)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_User.email">
+  <data key="d0">column</data>
+  <data key="d1">email</data>
+  <data key="d3">VARCHAR(100)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_User.phone_numer">
+  <data key="d0">column</data>
+  <data key="d1">phone_numer</data>
+  <data key="d3">VARCHAR(20)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_User.dob">
+  <data key="d0">column</data>
+  <data key="d1">dob</data>
+  <data key="d3">DATE</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_User.zip_code">
+  <data key="d0">column</data>
+  <data key="d1">zip_code</data>
+  <data key="d3">VARCHAR(10)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_User.createdAt">
+  <data key="d0">column</data>
+  <data key="d1">createdAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_User.updatedAt">
+  <data key="d0">column</data>
+  <data key="d1">updatedAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="table_Skill">
+  <data key="d0">table</data>
+  <data key="d1">Skill</data>
+  <data key="d2">5</data>
+</node>
+<node id="column_Skill.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Skill.name">
+  <data key="d0">column</data>
+  <data key="d1">name</data>
+  <data key="d3">VARCHAR(100)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Skill.description">
+  <data key="d0">column</data>
+  <data key="d1">description</data>
+  <data key="d3">VARCHAR(255)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Skill.createdAt">
+  <data key="d0">column</data>
+  <data key="d1">createdAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_Skill.updatedAt">
+  <data key="d0">column</data>
+  <data key="d1">updatedAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="table_User_Skill">
+  <data key="d0">table</data>
+  <data key="d1">User_Skill</data>
+  <data key="d2">5</data>
+</node>
+<node id="column_User_Skill.user_id">
+  <data key="d0">column</data>
+  <data key="d1">user_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_User_Skill.skill_id">
+  <data key="d0">column</data>
+  <data key="d1">skill_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_User_Skill.proficiency_level">
+  <data key="d0">column</data>
+  <data key="d1">proficiency_level</data>
+  <data key="d3">ENUM('Basic', 'Intermediate', 'Expert')</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_User_Skill.createdAt">
+  <data key="d0">column</data>
+  <data key="d1">createdAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_User_Skill.updatedAt">
+  <data key="d0">column</data>
+  <data key="d1">updatedAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="table_Education">
+  <data key="d0">table</data>
+  <data key="d1">Education</data>
+  <data key="d2">4</data>
+</node>
+<node id="column_Education.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Education.university_name">
+  <data key="d0">column</data>
+  <data key="d1">university_name</data>
+  <data key="d3">VARCHAR(100)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Education.createdAt">
+  <data key="d0">column</data>
+  <data key="d1">createdAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_Education.updatedAt">
+  <data key="d0">column</data>
+  <data key="d1">updatedAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="table_User_Education">
+  <data key="d0">table</data>
+  <data key="d1">User_Education</data>
+  <data key="d2">7</data>
+</node>
+<node id="column_User_Education.user_id">
+  <data key="d0">column</data>
+  <data key="d1">user_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_User_Education.education_id">
+  <data key="d0">column</data>
+  <data key="d1">education_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_User_Education.graduation_date">
+  <data key="d0">column</data>
+  <data key="d1">graduation_date</data>
+  <data key="d3">DATE</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_User_Education.degree">
+  <data key="d0">column</data>
+  <data key="d1">degree</data>
+  <data key="d3">ENUM('Associate', 'Bachelor', 'Master', 'PhD', 'Diploma')</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_User_Education.specialization">
+  <data key="d0">column</data>
+  <data key="d1">specialization</data>
+  <data key="d3">VARCHAR(100)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_User_Education.createdAt">
+  <data key="d0">column</data>
+  <data key="d1">createdAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_User_Education.updatedAt">
+  <data key="d0">column</data>
+  <data key="d1">updatedAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="table_Domain">
+  <data key="d0">table</data>
+  <data key="d1">Domain</data>
+  <data key="d2">5</data>
+</node>
+<node id="column_Domain.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Domain.name">
+  <data key="d0">column</data>
+  <data key="d1">name</data>
+  <data key="d3">VARCHAR(100)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Domain.description">
+  <data key="d0">column</data>
+  <data key="d1">description</data>
+  <data key="d3">VARCHAR(255)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Domain.createdAt">
+  <data key="d0">column</data>
+  <data key="d1">createdAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_Domain.updatedAt">
+  <data key="d0">column</data>
+  <data key="d1">updatedAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="table_Patent">
+  <data key="d0">table</data>
+  <data key="d1">Patent</data>
+  <data key="d2">10</data>
+</node>
+<node id="column_Patent.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Patent.title">
+  <data key="d0">column</data>
+  <data key="d1">title</data>
+  <data key="d3">VARCHAR(100)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Patent.summary">
+  <data key="d0">column</data>
+  <data key="d1">summary</data>
+  <data key="d3">VARCHAR(255)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Patent.status">
+  <data key="d0">column</data>
+  <data key="d1">status</data>
+  <data key="d3">ENUM('Approved', 'Expired')</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_Patent.domain_id">
+  <data key="d0">column</data>
+  <data key="d1">domain_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Patent.patent_no">
+  <data key="d0">column</data>
+  <data key="d1">patent_no</data>
+  <data key="d3">VARCHAR(100)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Patent.registration_date">
+  <data key="d0">column</data>
+  <data key="d1">registration_date</data>
+  <data key="d3">DATE</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Patent.expire_date">
+  <data key="d0">column</data>
+  <data key="d1">expire_date</data>
+  <data key="d3">DATE</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Patent.createdAt">
+  <data key="d0">column</data>
+  <data key="d1">createdAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_Patent.updatedAt">
+  <data key="d0">column</data>
+  <data key="d1">updatedAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="table_User_Patent">
+  <data key="d0">table</data>
+  <data key="d1">User_Patent</data>
+  <data key="d2">4</data>
+</node>
+<node id="column_User_Patent.user_id">
+  <data key="d0">column</data>
+  <data key="d1">user_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_User_Patent.patent_id">
+  <data key="d0">column</data>
+  <data key="d1">patent_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_User_Patent.createdAt">
+  <data key="d0">column</data>
+  <data key="d1">createdAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_User_Patent.updatedAt">
+  <data key="d0">column</data>
+  <data key="d1">updatedAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="table_Publisher">
+  <data key="d0">table</data>
+  <data key="d1">Publisher</data>
+  <data key="d2">5</data>
+</node>
+<node id="column_Publisher.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Publisher.title">
+  <data key="d0">column</data>
+  <data key="d1">title</data>
+  <data key="d3">VARCHAR(100)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Publisher.description">
+  <data key="d0">column</data>
+  <data key="d1">description</data>
+  <data key="d3">VARCHAR(255)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Publisher.createdAt">
+  <data key="d0">column</data>
+  <data key="d1">createdAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_Publisher.updatedAt">
+  <data key="d0">column</data>
+  <data key="d1">updatedAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="table_Group">
+  <data key="d0">table</data>
+  <data key="d1">Group</data>
+  <data key="d2">4</data>
+</node>
+<node id="column_Group.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Group.title">
+  <data key="d0">column</data>
+  <data key="d1">title</data>
+  <data key="d3">VARCHAR(100)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Group.createdAt">
+  <data key="d0">column</data>
+  <data key="d1">createdAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_Group.updatedAt">
+  <data key="d0">column</data>
+  <data key="d1">updatedAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="table_Publication">
+  <data key="d0">table</data>
+  <data key="d1">Publication</data>
+  <data key="d2">12</data>
+</node>
+<node id="column_Publication.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Publication.title">
+  <data key="d0">column</data>
+  <data key="d1">title</data>
+  <data key="d3">VARCHAR(255)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Publication.domain_id">
+  <data key="d0">column</data>
+  <data key="d1">domain_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Publication.publisher_id">
+  <data key="d0">column</data>
+  <data key="d1">publisher_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Publication.publication_date">
+  <data key="d0">column</data>
+  <data key="d1">publication_date</data>
+  <data key="d3">DATE</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Publication.abstract">
+  <data key="d0">column</data>
+  <data key="d1">abstract</data>
+  <data key="d3">VARCHAR(255)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Publication.keywords">
+  <data key="d0">column</data>
+  <data key="d1">keywords</data>
+  <data key="d3">VARCHAR(255)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Publication.doi">
+  <data key="d0">column</data>
+  <data key="d1">doi</data>
+  <data key="d3">VARCHAR(255)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Publication.status">
+  <data key="d0">column</data>
+  <data key="d1">status</data>
+  <data key="d3">ENUM('Draft', 'Submitted', 'Under Review', 'Published', 'Rejected')</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_Publication.group_id">
+  <data key="d0">column</data>
+  <data key="d1">group_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Publication.createdAt">
+  <data key="d0">column</data>
+  <data key="d1">createdAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_Publication.updatedAt">
+  <data key="d0">column</data>
+  <data key="d1">updatedAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="table_User_Publication">
+  <data key="d0">table</data>
+  <data key="d1">User_Publication</data>
+  <data key="d2">5</data>
+</node>
+<node id="column_User_Publication.user_id">
+  <data key="d0">column</data>
+  <data key="d1">user_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_User_Publication.publication_id">
+  <data key="d0">column</data>
+  <data key="d1">publication_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_User_Publication.user_role">
+  <data key="d0">column</data>
+  <data key="d1">user_role</data>
+  <data key="d3">ENUM('Lead Author', 'Corresponding Author')</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_User_Publication.createdAt">
+  <data key="d0">column</data>
+  <data key="d1">createdAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_User_Publication.updatedAt">
+  <data key="d0">column</data>
+  <data key="d1">updatedAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="table_User_Group">
+  <data key="d0">table</data>
+  <data key="d1">User_Group</data>
+  <data key="d2">4</data>
+</node>
+<node id="column_User_Group.user_id">
+  <data key="d0">column</data>
+  <data key="d1">user_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_User_Group.group_id">
+  <data key="d0">column</data>
+  <data key="d1">group_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_User_Group.createdAt">
+  <data key="d0">column</data>
+  <data key="d1">createdAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_User_Group.updatedAt">
+  <data key="d0">column</data>
+  <data key="d1">updatedAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="table_Organization">
+  <data key="d0">table</data>
+  <data key="d1">Organization</data>
+  <data key="d2">5</data>
+</node>
+<node id="column_Organization.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Organization.name">
+  <data key="d0">column</data>
+  <data key="d1">name</data>
+  <data key="d3">VARCHAR(100)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Organization.type">
+  <data key="d0">column</data>
+  <data key="d1">type</data>
+  <data key="d3">VARCHAR(100)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Organization.createdAt">
+  <data key="d0">column</data>
+  <data key="d1">createdAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_Organization.updatedAt">
+  <data key="d0">column</data>
+  <data key="d1">updatedAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="table_Position">
+  <data key="d0">table</data>
+  <data key="d1">Position</data>
+  <data key="d2">5</data>
+</node>
+<node id="column_Position.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Position.title">
+  <data key="d0">column</data>
+  <data key="d1">title</data>
+  <data key="d3">VARCHAR(100)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Position.description">
+  <data key="d0">column</data>
+  <data key="d1">description</data>
+  <data key="d3">VARCHAR(255)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Position.createdAt">
+  <data key="d0">column</data>
+  <data key="d1">createdAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_Position.updatedAt">
+  <data key="d0">column</data>
+  <data key="d1">updatedAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="table_Experience">
+  <data key="d0">table</data>
+  <data key="d1">Experience</data>
+  <data key="d2">9</data>
+</node>
+<node id="column_Experience.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Experience.user_id">
+  <data key="d0">column</data>
+  <data key="d1">user_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Experience.position_id">
+  <data key="d0">column</data>
+  <data key="d1">position_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Experience.organization_id">
+  <data key="d0">column</data>
+  <data key="d1">organization_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Experience.domain_id">
+  <data key="d0">column</data>
+  <data key="d1">domain_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Experience.start_date">
+  <data key="d0">column</data>
+  <data key="d1">start_date</data>
+  <data key="d3">DATE</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Experience.end_date">
+  <data key="d0">column</data>
+  <data key="d1">end_date</data>
+  <data key="d3">DATE</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Experience.createdAt">
+  <data key="d0">column</data>
+  <data key="d1">createdAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_Experience.updatedAt">
+  <data key="d0">column</data>
+  <data key="d1">updatedAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="table_Communication">
+  <data key="d0">table</data>
+  <data key="d1">Communication</data>
+  <data key="d2">6</data>
+</node>
+<node id="column_Communication.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Communication.user_id">
+  <data key="d0">column</data>
+  <data key="d1">user_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Communication.group_id">
+  <data key="d0">column</data>
+  <data key="d1">group_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Communication.message">
+  <data key="d0">column</data>
+  <data key="d1">message</data>
+  <data key="d3">VARCHAR(255)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Communication.createdAt">
+  <data key="d0">column</data>
+  <data key="d1">createdAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_Communication.updatedAt">
+  <data key="d0">column</data>
+  <data key="d1">updatedAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="table_Project">
+  <data key="d0">table</data>
+  <data key="d1">Project</data>
+  <data key="d2">10</data>
+</node>
+<node id="column_Project.id">
+  <data key="d0">column</data>
+  <data key="d1">id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">True</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Project.group_id">
+  <data key="d0">column</data>
+  <data key="d1">group_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Project.domain_id">
+  <data key="d0">column</data>
+  <data key="d1">domain_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Project.name">
+  <data key="d0">column</data>
+  <data key="d1">name</data>
+  <data key="d3">VARCHAR(100)</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Project.description">
+  <data key="d0">column</data>
+  <data key="d1">description</data>
+  <data key="d3">VARCHAR(255)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Project.status">
+  <data key="d0">column</data>
+  <data key="d1">status</data>
+  <data key="d3">ENUM('Not Started', 'In Progress', 'Completed', 'Cancelled')</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Project.start_date">
+  <data key="d0">column</data>
+  <data key="d1">start_date</data>
+  <data key="d3">DATE</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Project.end_date">
+  <data key="d0">column</data>
+  <data key="d1">end_date</data>
+  <data key="d3">DATE</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_Project.createdAt">
+  <data key="d0">column</data>
+  <data key="d1">createdAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_Project.updatedAt">
+  <data key="d0">column</data>
+  <data key="d1">updatedAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="table_User_Project">
+  <data key="d0">table</data>
+  <data key="d1">User_Project</data>
+  <data key="d2">7</data>
+</node>
+<node id="column_User_Project.project_id">
+  <data key="d0">column</data>
+  <data key="d1">project_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_User_Project.user_id">
+  <data key="d0">column</data>
+  <data key="d1">user_id</data>
+  <data key="d3">BIGINT</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_User_Project.hours">
+  <data key="d0">column</data>
+  <data key="d1">hours</data>
+  <data key="d3">INT</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_User_Project.user_role">
+  <data key="d0">column</data>
+  <data key="d1">user_role</data>
+  <data key="d3">ENUM('Lead', 'Member')</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_User_Project.user_contribution">
+  <data key="d0">column</data>
+  <data key="d1">user_contribution</data>
+  <data key="d3">VARCHAR(255)</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<node id="column_User_Project.createdAt">
+  <data key="d0">column</data>
+  <data key="d1">createdAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">False</data>
+  <data key="d5">False</data>
+  <data key="d6">True</data>
+</node>
+<node id="column_User_Project.updatedAt">
+  <data key="d0">column</data>
+  <data key="d1">updatedAt</data>
+  <data key="d3">DATETIME</data>
+  <data key="d4">True</data>
+  <data key="d5">False</data>
+  <data key="d6">False</data>
+</node>
+<edge source="column_Location.zip_code" target="table_Location">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Location.country" target="table_Location">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Location.createdAt" target="table_Location">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Location.updatedAt" target="table_Location">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User.id" target="table_User">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User.full_name" target="table_User">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User.email" target="table_User">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User.phone_numer" target="table_User">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User.dob" target="table_User">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User.zip_code" target="table_User">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User.createdAt" target="table_User">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User.updatedAt" target="table_User">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Skill.id" target="table_Skill">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Skill.name" target="table_Skill">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Skill.description" target="table_Skill">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Skill.createdAt" target="table_Skill">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Skill.updatedAt" target="table_Skill">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User_Skill.user_id" target="table_User_Skill">
+  <data key="d7">PRIMARY_KEY_OF</data>
+</edge>
+<edge source="column_User_Skill.skill_id" target="table_User_Skill">
+  <data key="d7">PRIMARY_KEY_OF</data>
+</edge>
+<edge source="column_User_Skill.proficiency_level" target="table_User_Skill">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User_Skill.createdAt" target="table_User_Skill">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User_Skill.updatedAt" target="table_User_Skill">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Education.id" target="table_Education">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Education.university_name" target="table_Education">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Education.createdAt" target="table_Education">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Education.updatedAt" target="table_Education">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User_Education.user_id" target="table_User_Education">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User_Education.education_id" target="table_User_Education">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User_Education.graduation_date" target="table_User_Education">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User_Education.degree" target="table_User_Education">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User_Education.specialization" target="table_User_Education">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User_Education.createdAt" target="table_User_Education">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User_Education.updatedAt" target="table_User_Education">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Domain.id" target="table_Domain">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Domain.name" target="table_Domain">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Domain.description" target="table_Domain">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Domain.createdAt" target="table_Domain">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Domain.updatedAt" target="table_Domain">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Patent.id" target="table_Patent">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Patent.title" target="table_Patent">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Patent.summary" target="table_Patent">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Patent.status" target="table_Patent">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Patent.domain_id" target="table_Patent">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Patent.patent_no" target="table_Patent">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Patent.registration_date" target="table_Patent">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Patent.expire_date" target="table_Patent">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Patent.createdAt" target="table_Patent">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Patent.updatedAt" target="table_Patent">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User_Patent.user_id" target="table_User_Patent">
+  <data key="d7">PRIMARY_KEY_OF</data>
+</edge>
+<edge source="column_User_Patent.patent_id" target="table_User_Patent">
+  <data key="d7">PRIMARY_KEY_OF</data>
+</edge>
+<edge source="column_User_Patent.createdAt" target="table_User_Patent">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User_Patent.updatedAt" target="table_User_Patent">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Publisher.id" target="table_Publisher">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Publisher.title" target="table_Publisher">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Publisher.description" target="table_Publisher">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Publisher.createdAt" target="table_Publisher">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Publisher.updatedAt" target="table_Publisher">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Group.id" target="table_Group">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Group.title" target="table_Group">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Group.createdAt" target="table_Group">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Group.updatedAt" target="table_Group">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Publication.id" target="table_Publication">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Publication.title" target="table_Publication">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Publication.domain_id" target="table_Publication">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Publication.publisher_id" target="table_Publication">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Publication.publication_date" target="table_Publication">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Publication.abstract" target="table_Publication">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Publication.keywords" target="table_Publication">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Publication.doi" target="table_Publication">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Publication.status" target="table_Publication">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Publication.group_id" target="table_Publication">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Publication.createdAt" target="table_Publication">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Publication.updatedAt" target="table_Publication">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User_Publication.user_id" target="table_User_Publication">
+  <data key="d7">PRIMARY_KEY_OF</data>
+</edge>
+<edge source="column_User_Publication.publication_id" target="table_User_Publication">
+  <data key="d7">PRIMARY_KEY_OF</data>
+</edge>
+<edge source="column_User_Publication.user_role" target="table_User_Publication">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User_Publication.createdAt" target="table_User_Publication">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User_Publication.updatedAt" target="table_User_Publication">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User_Group.user_id" target="table_User_Group">
+  <data key="d7">PRIMARY_KEY_OF</data>
+</edge>
+<edge source="column_User_Group.group_id" target="table_User_Group">
+  <data key="d7">PRIMARY_KEY_OF</data>
+</edge>
+<edge source="column_User_Group.createdAt" target="table_User_Group">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User_Group.updatedAt" target="table_User_Group">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Organization.id" target="table_Organization">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Organization.name" target="table_Organization">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Organization.type" target="table_Organization">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Organization.createdAt" target="table_Organization">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Organization.updatedAt" target="table_Organization">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Position.id" target="table_Position">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Position.title" target="table_Position">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Position.description" target="table_Position">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Position.createdAt" target="table_Position">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Position.updatedAt" target="table_Position">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Experience.id" target="table_Experience">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Experience.user_id" target="table_Experience">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Experience.position_id" target="table_Experience">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Experience.organization_id" target="table_Experience">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Experience.domain_id" target="table_Experience">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Experience.start_date" target="table_Experience">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Experience.end_date" target="table_Experience">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Experience.createdAt" target="table_Experience">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Experience.updatedAt" target="table_Experience">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Communication.id" target="table_Communication">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Communication.user_id" target="table_Communication">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Communication.group_id" target="table_Communication">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Communication.message" target="table_Communication">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Communication.createdAt" target="table_Communication">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Communication.updatedAt" target="table_Communication">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Project.id" target="table_Project">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Project.group_id" target="table_Project">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Project.domain_id" target="table_Project">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Project.name" target="table_Project">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Project.description" target="table_Project">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Project.status" target="table_Project">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Project.start_date" target="table_Project">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Project.end_date" target="table_Project">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Project.createdAt" target="table_Project">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_Project.updatedAt" target="table_Project">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User_Project.project_id" target="table_User_Project">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User_Project.user_id" target="table_User_Project">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User_Project.hours" target="table_User_Project">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User_Project.user_role" target="table_User_Project">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User_Project.user_contribution" target="table_User_Project">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User_Project.createdAt" target="table_User_Project">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+<edge source="column_User_Project.updatedAt" target="table_User_Project">
+  <data key="d7">BELONGS_TO</data>
+</edge>
+</graph></graphml>

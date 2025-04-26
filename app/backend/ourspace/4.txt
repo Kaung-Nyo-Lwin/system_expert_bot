@@ -1,0 +1,52 @@
+**SQL Procedure Analysis: `sp_PayCharge`**
+=====================================================
+
+### 1. Overview
+The `sp_PayCharge` SQL procedure is designed to record a payment made by a customer for a booking. It calculates the amount to be paid, updates the payment status, and inserts a new payment record into the `payment` table.
+
+### 2. Input
+The procedure takes the following input parameters:
+
+* `rid`: The ID of the customer (integer)
+* `bid`: The ID of the booking (integer)
+* `paid`: The amount paid by the customer (float)
+* `transcId`: The transaction ID (string, 200 characters)
+* `bank`: The bank name (string, 200 characters)
+
+### 3. Output
+The procedure does not return any output directly. However, it inserts a new payment record into the `payment` table, which can be retrieved using a SELECT statement.
+
+### 4. Tables
+The procedure uses the following tables:
+
+* `booking`: The table containing booking information
+* `payment`: The table containing payment information
+
+### 5. Logic
+The procedure follows these steps:
+
+1. Calculate the total amount to be paid for the booking by subtracting the sum of completed payments from the booking total.
+2. Calculate the unpaid amount by subtracting the paid amount from the total amount to be paid.
+3. Set the payment status to 'completed'.
+4. Insert a new payment record into the `payment` table with the calculated amounts and status.
+
+### 6. Operations
+The procedure performs the following operations:
+
+* Read: Retrieves data from the `booking` and `payment` tables
+* Write: Inserts a new payment record into the `payment` table
+* Update: Updates the payment status (not explicitly, but the status is set to 'completed')
+
+### 7. Use Case
+The `sp_PayCharge` procedure can be used in the following scenarios:
+
+* When a customer makes a payment for a booking, the procedure can be called to record the payment and update the payment status.
+* When a payment is made, the procedure can be used to calculate the remaining balance and update the payment status accordingly.
+
+**Example Use Case:**
+
+```sql
+CALL sp_PayCharge(1, 1, 50, 'txt0001', 'test');
+```
+
+This call would record a payment of $50 for booking ID 1, with transaction ID 'txt0001' and bank name 'test'. The payment status would be set to 'completed'.
