@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import VisGraph from "../components/VisGraph"; // Import VisGraph
 
+import ReactMarkdown from 'react-markdown';
+
 export default function ChatPage() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
