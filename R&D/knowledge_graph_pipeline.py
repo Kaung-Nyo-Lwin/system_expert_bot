@@ -645,3 +645,72 @@ def extract_query_labels(kg: nx.DiGraph, query_id: str) -> dict:
             })
     
     return result
+
+
+def extract_nodes_edges(kg: nx.DiGraph, query_id: str):
+    """
+    Extract nodes and edges for visualizing a query-specific subgraph from the KG.
+    """
+    extracted = extract_query_labels(kg, query_id)
+    
+    nodes = []
+    edges = []
+    
+    # --- Build Nodes ---
+    # Add the query node itself
+    nodes.append({
+        "id": query_id,
+        "label": "Query",
+        "color": "#FFAAAA",  # light red for query
+        "shape": "box"
+    })
+    
+    # Add table nodes
+    for table in extracted["tables"]:
+        nodes.append({
+            "id": table["id"],
+            "label": table["label"],
+            "color": "#AAAAFF",  # light blue for tables
+            "shape": "dot"
+        })
+    
+    # Add column nodes
+    for column in extracted["columns"]:
+        nodes.append({
+            "id": column["id"],
+            "label": f"{column['label']}\n({column['table']})",
+            "color": "#AAFFAA",  # light green for columns
+            "shape": "dot"
+        })
+    
+    # Add CTE nodes (if you have any)
+    for cte in extracted["ctes"]:
+        nodes.append({
+            "id": cte["id"],
+            "label": cte["label"],
+            "color": "#FFD700",  # gold color for CTEs
+            "shape": "box"
+        })
+    
+    # --- Build Edges ---
+    for rel in extracted["relations"]:
+        from_node = rel["source"]
+        to_node = rel["target"]
+        label = rel["label"]
+        
+        edge = {
+            "from": from_node,
+            "to": to_node,
+            "label": label,
+            "arrows": "to",
+            "color": "green" if label == "REFERENCES" else "blue",
+            "dashes": False
+        }
+        
+        # Special color for joins
+        if label == "JOINED_WITH":
+            edge["color"] = "red"
+        
+        edges.append(edge)
+    
+    return nodes, edges
