@@ -21,10 +21,8 @@ from llama_index.core import (
 from llama_index.core import SimpleDirectoryReader, Document
 from llama_index.llms.openai import OpenAI
 # from llama_index.embeddings.openai import OpenAIEmbedding
-from llama_index.utils.workflow import draw_all_possible_flows
-from langchain.embeddings import HuggingFaceInstructEmbeddings
-import InstructorEmbedding
-from langchain.embeddings import HuggingFaceInstructEmbeddings
+# from llama_index.utils.workflow import draw_all_possible_flows
+from langchain.embeddings import HuggingFaceEmbeddings
 from langchain_groq import ChatGroq
 from dotenv import load_dotenv
 import knowledge_graph_pipeline as pipeline
@@ -69,7 +67,7 @@ class SoftwareDocBot(Workflow):
     5. document_response – Draft a user‑facing answer, then pause via InputRequiredEvent.
     6. get_feedback – Decide whether to stop, or loop back to rag_query with extra feedback.
     """
-    def __init__(self, storage_dir: str, data_dir: str, model: str = "groq", *args, **kwargs):
+    def __init__(self, storage_dir: str, data_dir: str, model: str = "groq",mode=None, evaluate=False, *args, **kwargs):
         super().__init__(*args, **kwargs)
         load_dotenv()
         # openai.api_key = os.environ['OPENAI_API_KEY']
@@ -81,10 +79,16 @@ class SoftwareDocBot(Workflow):
             max_retries=2,
         )
         self.llm_openai = OpenAI(model="gpt-4o-mini")
-        self.embedding_model = HuggingFaceInstructEmbeddings(
-            model_name = 'hkunlp/instructor-base'
+        # self.embedding_model = HuggingFaceInstructEmbeddings(
+        #     model_name = 'hkunlp/instructor-base'
+        # )
+
+        self.embedding_model = HuggingFaceEmbeddings(
+            model_name="sentence-transformers/all-MiniLM-L6-v2"
         )
         self.model = model
+        self.mode = mode
+        self.evaluate = evaluate
         # -------- constants ------------------------------------------------------
         self.storage_dir: str = storage_dir
         self.data_dir: str = data_dir  # directory containing *.sql files to embed
@@ -130,12 +134,11 @@ class SoftwareDocBot(Workflow):
         return f"{i} procedures are documented"
 
     def extract_query_labels(self, sql_query):
-        loaded_knowledge_graph = pipeline.load_kg_graphml('sql_knowledge_graph')
+        loaded_knowledge_graph = pipeline.load_kg_graphml('ourspace_sql_knowledge_graph')
         parsed_query = pipeline.parse_sql(sql_query)
         _, query_id = pipeline.update_kg_with_query(loaded_knowledge_graph, parsed_query)
         return pipeline.extract_query_labels(loaded_knowledge_graph, query_id)
 
-    
     # -------- set‑up ---------------------------------------------------------
     @step
     async def set_up(self, ctx: Context, ev: StartEvent) -> GenerateQuestionsEvent:
@@ -176,11 +179,14 @@ class SoftwareDocBot(Workflow):
     ) -> QueryEvent:
         """Generate follow‑up questions using the LLM (or reuse after feedback)."""
         user_query: str = await ctx.get("user_query")
+        feedback: str = getattr(ev, "Feedback", "")
         rag_prompt = (
             f"User Query: {user_query}\n. "
-            "Based on the user query, retrieve the most relevant store procedures.\n"
+            f"Feedback: {feedback}\n"
+            "Based on the user query and feedback, retrieve the most relevant store procedures.\n"
         )
         retrieved_procedures = self.retriever.retrieve(rag_prompt)
+        await ctx.set("retrieved_procedures", retrieved_procedures)
         # extra_feedback: str = getattr(ev, "Feedback", "")
         user_feedback: str = getattr(ev, "Feedback", "")
         latest_response: str = await ctx.get("latest_response", default="")
@@ -287,6 +293,7 @@ class SoftwareDocBot(Workflow):
         # graph_info: str = await ctx.get("graph_info", default="")
         # tables = ""
         kg_info = await ctx.get("kg_info")
+        retrieved_procedures = await ctx.get("retrieved_procedures")
 
         context_blob = "\n\n".join(sql_snippets) if sql_snippets else "[No SQL snippets retrieved]"
         
@@ -315,6 +322,9 @@ class SoftwareDocBot(Workflow):
             "\n\n"
         )
 
+        if self.mode == "no_graph":
+            kg_info = ""
+    
         content = (
             f"User question:\n{user_query}\n\n"
             f"Generated questions:\n{await ctx.get('generated_questions')}\n\n"
@@ -323,6 +333,24 @@ class SoftwareDocBot(Workflow):
             f"Explanation of the SQL procedures:\n{explanation}\n\n"
             "\n\n"
         )
+
+        if self.mode == "simple_rag":
+            content = (
+                f"User question:\n{user_query}\n\n"
+                f"Context:\n{retrieved_procedures}\n\n"
+                "\n\n"
+            )
+
+        summary_prompt = (
+            "Summarize the following content:\n\n"
+            "The summary must be under 2000 tokens.\n\n"
+            f"{content}\n\n"
+            "Summary:"
+        )
+
+        if self.evaluate==True or self.mode == "no_graph":
+            content = self.llm_openai.complete(summary_prompt).text.strip()
+
         if latest_response:
             content += f"Last answser:\n{latest_response}\n\n"
         if latest_feedback:
