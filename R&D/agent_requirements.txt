@@ -1,0 +1,10 @@
+# Requirements for agent.py
+llama-index==0.12.32
+langchain==0.3.24
+langchain-groq==0.2.5
+python-dotenv==1.0.1
+openai==1.75.0
+InstructorEmbedding==1.0.1
+sqlglot==26.16.0
+networkx==3.4.2
+pyvis==0.3.2
