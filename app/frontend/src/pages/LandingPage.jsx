@@ -1,47 +1,3 @@
-
-// import React from "react";
-// import { useNavigate } from "react-router-dom";
-// import logo from "../assets/logo1.png";
-
-// export default function LandingPage() {
-//   const navigate = useNavigate();
-
-//   return (
-//     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white flex flex-col items-center justify-center px-4">
-//       <div className="text-center">
-//         <img src={logo} alt="SoftwareDocBot Logo" className="w-40 mx-auto mb-4" />
-//         <h1 className="text-5xl font-extrabold text-gray-800 mb-2">SoftwareDocBot</h1>
-//         <p className="text-lg text-gray-600 font-light mb-8">AI-Powered Software System Interpreter</p>
-
-//         <div className="bg-white shadow-2xl rounded-xl p-8 max-w-xl mx-auto transition-transform hover:scale-105 border">
-//           <h2 className="text-2xl font-semibold mb-4 text-gray-800">Understand Software Logic Effortlessly</h2>
-//           <p className="text-gray-600 leading-relaxed">
-//             SoftwareDocBot converts SQL queries and schema structures into clear business-level explanations.
-//             A bridge between developers and business users—no SQL knowledge needed.
-//           </p>
-
-//           <button
-//             onClick={() => navigate("/chat")}
-//             className="mt-6 px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white text-lg font-medium rounded-full shadow-md transition-all"
-//             style={{ boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)" }}
-//           >
-//             Let’s Get Started →
-//           </button>
-//         </div>
-
-//         <div className="mt-6 text-sm text-gray-500">
-//           <p>
-//             An NLP project under <strong>Dr. Chaklam Silpasuwanchai</strong><br />
-//             Built by Kaung Nyo Lwin, Phone Myint Naing, Khin Yadanar Hlaing
-//           </p>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-
-
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo1.png";
@@ -85,25 +41,37 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* Call to Action */}
-        <div className="mt-10 text-center">
+        {/* Call to Action Buttons */}
+        <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
           <button
             onClick={() => navigate("/chat")}
             className="px-8 py-3 bg-[#00857C] hover:bg-[#006f67] text-white text-lg font-medium rounded-full shadow-lg transition-transform transform hover:scale-105"
           >
             Start Exploring →
           </button>
+          <button
+            onClick={() => navigate("/model1")}
+            className="px-8 py-3 bg-indigo-500 hover:bg-indigo-600 text-white text-lg font-medium rounded-full shadow-lg transition-transform transform hover:scale-105"
+          >
+            SQL Query Generator
+          </button>
+          <button
+            onClick={() => navigate("/model2")}
+            className="px-8 py-3 bg-purple-500 hover:bg-purple-600 text-white text-lg font-medium rounded-full shadow-lg transition-transform transform hover:scale-105"
+          >
+            SQL Explainer
+          </button>
         </div>
       </div>
 
       {/* Footer Credits */}
       <div className="mt-12 text-sm text-gray-500 text-center">
-  <p>
-    Built as part of <strong>AT82.05 Natural Language Understanding</strong>, under the guidance of{" "}
-    <strong>Dr. Chaklam Silpasuwanchai</strong>
-  </p>
-  <p>By Kaung Nyo Lwin, Phone Myint Naing, Khin Yadanar Hlaing</p>
-</div>
+        <p>
+          Built as part of <strong>AT82.05 Natural Language Understanding</strong>, under the guidance of{" "}
+          <strong>Dr. Chaklam Silpasuwanchai</strong>
+        </p>
+        <p>By Kaung Nyo Lwin, Phone Myint Naing, Khin Yadanar Hlaing</p>
+      </div>
     </div>
   );
 }

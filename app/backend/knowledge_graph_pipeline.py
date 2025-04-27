@@ -214,7 +214,7 @@ def _extract_columns(parsed: exp.Expression,
                     table_aliases: Dict[str, str]):
     """Extract columns with proper table context."""
     for col in parsed.find_all(exp.Column):
-        table_name = table_aliases.get(col.table, col.table)
+        table_name = table_aliases.get(col.table, list(table_aliases.keys())[0])
         components.columns.add(f"{table_name}.{col.name}")
         
 def _extract_joins(parsed: exp.Expression, 
@@ -645,8 +645,6 @@ def extract_query_labels(kg: nx.DiGraph, query_id: str) -> dict:
             })
     
     return result
-
-
 def extract_nodes_edges(kg: nx.DiGraph, query_id: str):
     """
     Extract nodes and edges for visualizing a query-specific subgraph from the KG.

@@ -67,7 +67,7 @@ class SoftwareDocBot(Workflow):
     5. document_response – Draft a user‑facing answer, then pause via InputRequiredEvent.
     6. get_feedback – Decide whether to stop, or loop back to rag_query with extra feedback.
     """
-    def __init__(self, storage_dir: str, data_dir: str, model: str = "groq",mode=None, evaluate=False, *args, **kwargs):
+    def __init__(self, storage_dir: str, data_dir: str, model: str = "groq",kg_graph='ourspace_sql_knowledge_graph',mode=None, evaluate=False, *args, **kwargs):
         super().__init__(*args, **kwargs)
         load_dotenv()
         # openai.api_key = os.environ['OPENAI_API_KEY']
@@ -93,7 +93,7 @@ class SoftwareDocBot(Workflow):
         self.storage_dir: str = storage_dir
         self.data_dir: str = data_dir  # directory containing *.sql files to embed
         self.kg_viz = "",""
-        self.loaded_knowledge_graph = pipeline.load_kg_graphml('ourspace_sql_knowledge_graph')
+        self.loaded_knowledge_graph = pipeline.load_kg_graphml(kg_graph)
 
     def _generate(self, prompt: str) -> str:
         if self.model == "groq":
@@ -310,19 +310,19 @@ class SoftwareDocBot(Workflow):
             "You are an expert business analyst who knows SQL and business processes."
             "Using the following SQL procedures, tables, explanation of the SQL procedures, "
             "and any graph info provided, answer the user's question in detail.\n\n"
-            "Standard Format:"
-            "Please provide a structured response with the following sections: \n"
-            "1. rules: List of business rules identified \n"
-            "2. constraints: List of business constraints \n"
-            "3. calculations: List of any calculations or formulas \n"
-            "4. workflows: List of process workflows \n"
-            "5. tables: List of related tables \n"
+            # "Standard Format:"
+            # "Please provide a structured response with the following sections: \n"
+            # "1. rules: List of business rules identified \n"
+            # "2. constraints: List of business constraints \n"
+            # "3. calculations: List of any calculations or formulas \n"
+            # "4. workflows: List of process workflows \n"
+            # "5. tables: List of related tables \n"
             "Note:"
             "1. If you don't have enough information, just say 'Not enough information' for each section.\n\n"
             "2. If the specified section is provided in the context, use the provided information and ignore the standard format.\n\n"
             "Answer: The answer to the user's question. Don't include any other information beyond the standard format."
             "\n\n"
-            "Output format: Markdown."
+            # "Output format: TEXT \n\n"
             "\n\n"
             "Context: The following information is provided for context: \n\n"
             "\n\n"
@@ -399,6 +399,7 @@ async def answer_question(workflow, question):
     async for event in handler.stream_events():
         if isinstance(event, InputRequiredEvent):
             feedback = "OKay"
+            # feedback = input(event.prefix)
             handler.ctx.send_event(
                 HumanResponseEvent(
                     response=feedback

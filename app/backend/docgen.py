@@ -1,12 +1,22 @@
-from docx import Document
-import uuid, os
-def create_doc(user_input, response):
-    filename = f"{uuid.uuid4().hex}.docx"
-    doc = Document()
-    doc.add_heading("SoftwareDocBot Output", 0)
-    doc.add_paragraph(f"User input: {user_input}")
-    doc.add_paragraph(f"Bot response: {response}")
-    path = os.path.join("static/docs", filename)
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    doc.save(path)
-    return filename
+from fpdf import FPDF
+import os
+from datetime import datetime
+
+def create_doc(bot_response, output_dir="static/docs"):
+    #  Create output folder if missing
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font("Arial", size=12)
+
+    pdf.multi_cell(0, 10, bot_response)
+
+    #  Save with timestamp to avoid conflict
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"chat_{timestamp}.pdf"
+    pdf_path = os.path.join(output_dir, filename)
+    pdf.output(pdf_path)
+
+    return filename  
