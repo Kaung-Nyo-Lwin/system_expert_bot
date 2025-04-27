@@ -13,3 +13,8 @@ app/frontend/node_modules/
 # Also for backend cache
 app/backend/__pycache__/
 app/backend/*.pyc
+
+/app/backend/static/
+/app/backend/fine-tuned-t5-small-sql/
+/app/backend/tinyllama-sql-explainer-full/
+*.pdf
