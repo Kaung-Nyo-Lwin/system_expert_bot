@@ -92,6 +92,8 @@ class SoftwareDocBot(Workflow):
         # -------- constants ------------------------------------------------------
         self.storage_dir: str = storage_dir
         self.data_dir: str = data_dir  # directory containing *.sql files to embed
+        self.kg_viz = "",""
+        self.loaded_knowledge_graph = pipeline.load_kg_graphml('ourspace_sql_knowledge_graph')
 
     def _generate(self, prompt: str) -> str:
         if self.model == "groq":
@@ -134,10 +136,12 @@ class SoftwareDocBot(Workflow):
         return f"{i} procedures are documented"
 
     def extract_query_labels(self, sql_query):
-        loaded_knowledge_graph = pipeline.load_kg_graphml('ourspace_sql_knowledge_graph')
+        # loaded_knowledge_graph = pipeline.load_kg_graphml('ourspace_sql_knowledge_graph')
         parsed_query = pipeline.parse_sql(sql_query)
-        _, query_id = pipeline.update_kg_with_query(loaded_knowledge_graph, parsed_query)
-        return pipeline.extract_query_labels(loaded_knowledge_graph, query_id)
+        print(f"Parsed tables: {parsed_query}")
+        _, query_id = pipeline.update_kg_with_query(self.loaded_knowledge_graph, parsed_query)
+        return pipeline.extract_query_labels(self.loaded_knowledge_graph, query_id),query_id
+    
 
     # -------- set‑up ---------------------------------------------------------
     @step
@@ -275,7 +279,9 @@ class SoftwareDocBot(Workflow):
         print(f"Generated SQL query: {sql_query}")
         # await ctx.set("sql_query", sql_query)
         try:
-            kg_info = self.extract_query_labels(sql_query)
+            kg_info,query_id = self.extract_query_labels(sql_query)
+            print('Kg viz testing',pipeline.extract_nodes_edges(self.loaded_knowledge_graph,query_id))
+            self.kg_viz = pipeline.extract_nodes_edges(self.loaded_knowledge_graph,query_id)
             await ctx.set("kg_info", kg_info)
         except Exception as e:
             print(f"Failed to extract query labels: {e}")
