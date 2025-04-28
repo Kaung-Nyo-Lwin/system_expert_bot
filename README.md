@@ -112,5 +112,20 @@ Result: Our fine-tuned model provided more context-aware and accurate explanatio
 - **QA/Testers:** Validate backend behavior logically  
 - **New Team Members:** Learn software systems faster
 
+##  Web Interface
 
+![SoftwareDocBot Architecture](assets/1.png)
+
+
+![SoftwareDocBot Architecture](assets/2.png)
+
+
+
+![SoftwareDocBot Architecture](assets/3.png)
+
+
+![SoftwareDocBot Architecture](assets/4.png)
+
+
+![SoftwareDocBot Architecture](assets/5.png)
 
