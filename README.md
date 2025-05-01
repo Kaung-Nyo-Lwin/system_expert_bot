@@ -112,6 +112,11 @@ Result: Our fine-tuned model provided more context-aware and accurate explanatio
 - **QA/Testers:** Validate backend behavior logically  
 - **New Team Members:** Learn software systems faster
 
+## 📽️ Demo Video
+
+Watch the demo here: [SoftwareDocBot Demo](https://drive.google.com/file/d/1tPBjoKACIbF4xF4Vv0mB9_JgCbbVjDry/view?usp=sharing)
+
+
 ##  Web Interface
 
 ![SoftwareDocBot Architecture](assets/1.png)
