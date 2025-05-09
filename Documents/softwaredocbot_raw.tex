@@ -1,0 +1,596 @@
+\documentclass[11pt]{article}
+\usepackage[round]{natbib}
+\usepackage{acl}
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+
+\title{SoftwareDocBot: Bridging Technical and Business Understanding through Automated SQL and Schema Explanation}
+
+\author{
+    \begin{tabular}{ccc}
+    {Kaung Nyo Lwin} & {Phone Myint Naing} &{Khin Yadanar Hlaing} \\
+        Department of DSAI & Department of DSAI & Department of DSAI \\
+        Asian Institute of Technology & Asian Institute of Technology & Asian Institute of Technology \\
+        \texttt{st125066@ait.asia} & \texttt{st124973@ait.asia} & \texttt{st124959@ait.asia}
+    \end{tabular}
+}
+
+\begin{document}
+
+
+
+\maketitle
+
+
+
+\begin{abstract}
+Effective documentation is essential for maintaining a software system and ensuring its understanding by both technical and non-technical stakeholders. Developers often face the problem of outdated or incomplete documentation. Since business users struggle to understand how platforms support their business processes, we introduce SoftwareDocBot. It's an interactive chatbot that automatically generates clear, contextual documentation using SQL queries and database schema inputs. We focus on the database schema and queries because business logic is mostly encoded in the database structure of the software system. SoftwareDocBot serves as a two-way bridge that helps developers and business users communicate more effectively. Incorporating natural language processing techniques, structured knowledge graphs, and enhanced retrieval, it helps increase document access, support integration, and ensure continued consistency as the software system evolves.
+
+
+\end{abstract}
+
+\section{Introduction}
+
+
+Software documentation plays a critical role in system maintenance and in bridging the communication gap between developers and business users. Developers often face the challenge of working with complex SQL logic that lacks contextual explanation, while non-technical stakeholders struggle to understand how the system supports business workflows. Traditional documentation primarily focuses on structural elements—such as table definitions—without addressing the semantic meaning or business logic embedded within SQL queries or schema relationships. This leads to inefficiencies, repeated clarification requests, and slower adaptation to system changes.
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{New_Work _flow.png}
+\caption{Overview of the \textbf{SoftwareDocBot} Architecture.}
+\label{fig:overview}
+\end{figure*}
+
+To address these limitations, we propose SoftwareDocBot: an intelligent system that automatically generates natural language explanations of SQL logic and database behavior. The goal is to make software systems more transparent and accessible to both technical and non-technical users. Business users can ask questions in natural language and receive understandable explanations of data logic, relationships, and recent changes—without needing to read or interpret raw SQL code.
+
+
+SoftwareDocBot will draw business logic and explanations for non-technical users based on the database schema and SQL queries or procedures that are designed for business use cases or analytics. To fulfill this, we have applied a large language model (LLM)  to interpret the SQL codes into business logic and explanations. However, we hypothesize that the LLM alone can hallucinate in retrieving and interpreting the schema information such as tables and their attributes because the retrieval of chunked documents may add unnecessary information or may provide not enough information. Although this drawback is acceptable for SQL procedures, which may be interpreted as different logic, the table information should be completely correct as this is a fixed schema. Hence, we employ SQL parser(Sqlglot) and Graph parser (NETWORK X) to build the knowledge graph of the database schema so that the accurate information can be retrieved from the graph. Together with this information, the relevant SQL codes are interpreted into business logic using a LLM. The whole workflow is designed as an event-driven agentic workflow. The overall workflow is visualized in Figure~\ref{fig:overview}.
+
+
+
+
+
+\subsection{Project Scope}
+
+
+
+\textbf{SoftwareDocBot} is an intelligent system designed to automatically generate clear, business-aligned documentation for SQL-based software systems. It focuses on explaining the logic behind SQL queries and database schemas in natural language, making it understandable to both developers and business stakeholders.
+
+The system combines knowledge graphs (via SQL parsers) with generative language models (LLMs) to ensure both technical accuracy and human readability. It is architected as an event-driven, agentic workflow capable of adapting to schema changes, integrating user feedback, and providing contextual explanations on demand.
+
+Key components of the system include:
+
+\begin{itemize}
+    \item \textbf{SQL Parsing (sqlglot)}: Extracts structured schema information and interprets SQL logic.
+    
+    \item \textbf{Knowledge Graph Construction (NetworkX)}: Builds a formal representation of tables, columns, keys, and inter-table relationships.
+    
+    \item \textbf{Vector-Based Retrieval (FAISS)}: Supports semantic search over SQL procedures and associated documentation.
+    
+    \item \textbf{Large Language Models (LLMs)}: Interprets and generates natural language explanations using contextual inputs.
+    
+    \item \textbf{Agentic Workflow}: Orchestrates each stage of processing—from retrieval and reasoning to response generation and human feedback.
+\end{itemize}
+
+
+
+
+
+\subsection{Research Questions}
+To evaluate the effectiveness of SoftwareDocBot and guide its development, we define key research questions that address the system’s core capabilities and assumptions. These questions explore the impact of natural language explanations on user understanding, the role of knowledge graph integration for structural accuracy, and the benefits of model fine-tuning on domain-specific data. Specifically, we aim to investigate:
+
+RQ1: How much does the agentic workflow improve the explanation quality?
+
+RQ2: Does using a knowledge graph for schema representation enhance the system’s ability to explain query logic and structure?
+
+RQ3: How much does fine-tuning on domain-specific data improve explanation quality?
+
+These research questions serve as the guide for both our system evaluation and iterative refinement strategy and are answered with experiments designed to measure the metric such as the the Bilingual Evaluation Understudy (BLEU) score.
+
+
+
+
+
+\section{Related Work}
+
+Our work draws from several areas of research, including semantic parsing for text-to-SQL, schema representation learning, knowledge graph construction, and explanation generation using large language models.
+
+\subsection{Text-to-SQL Parsing and Schema Representation}
+
+The Spider dataset established a benchmark for complex, cross-domain semantic parsing, requiring models to generalize to new databases and unseen SQL patterns \citep{yu-etal-2018-spider}. Building on this, RAT-SQL proposed a relation-aware self-attention mechanism that encodes both schema structure and question-schema relations, significantly improving performance on Spider \citep{wang-etal-2020-rat}. While RAT-SQL focuses on SQL generation from natural language, our system reverses this goal: we start from SQL and aim to generate natural language explanations using schema context, supported by a graph-based encoding inspired by RAT-SQL \citep{wang-etal-2020-rat}.
+ 
+\subsection{Relation-Aware Schema Encoding and Linking
+ for Text-to-SQL Parsers (RAT-SQL)}
+
+A core challenge in text-to-SQL parsing is schema linking—mapping elements in natural language to specific database columns or tables. RAT-SQL addresses this using name-based and value-based matching techniques to align question tokens with schema elements \citep{wang-etal-2020-rat}. Our system adapts similar techniques to identify critical elements in SQL queries and relate them to human-readable schema concepts when generating developer and business-facing summaries.
+ 
+\subsection{CommonsenseTransformers for Automatic Knowledge Graph Construction (COMET)}
+
+COMET introduced a transformer-based generative model that learns to extend commonsense knowledge graphs by generating structured triples and natural language explanations from them \citep{bosselut-etal-2019-comet}. While our domain differs, we adopt a similar approach—leveraging transformer-based language models to generate natural language explanations grounded in structured SQL inputs and schema graphs.
+
+\subsection{Question Answering over Incomplete Knowledge Bases}
+
+The Knowledge-Aware Reader model combines structured knowledge base information and unstructured retrieved text to improve question answering \citep{xiong-etal-2019-knowledge}. It employs a graph attention mechanism to enhance text understanding using knowledge-derived features. Our method draws from this by retrieving relevant schema fragments or SQL procedures using FAISS and feeding them into a language model to generate contextual documentation \citep{xiong-etal-2019-knowledge}.
+
+
+Large Language Models (LLMs) like Llama 2 \citep{touvron2023llama}, PaLM \citep{chowdhery2023palm}, GPT-3 \citep{brown2020language}, GPT-4 \citep{achiam2023gpt4}, and Vicuna-13B \citep{chiang2023vicuna} have reshaped Natural Language Processing (NLP) across multiple dimensions. Their strengths support the creation of refined versions, such as InstructGPT \citep{ouyang2022training}, which highlights how refining GPT models with human feedback can markedly improve their fit with user expectations. However, LLMs still suffer from issues like hallucination and outdated knowledge, which Retrieval-Augmented Generation (RAG) addresses by combining language models with external context \citep{lewis2020retrieval, siriwardhana2023improving, lin2023ra, gao2023retrieval}.
+
+Agentic workflows define static sequences of LLM-driven steps, while autonomous agents make dynamic decisions to complete tasks in open-ended environments \citep{zhuge2023mindstorms,hong2024data,zhang2024mobileexperts,wang2023voyager}. Our system employs the former, leveraging human domain knowledge to create a flexible, iterative explanation pipeline that incorporates feedback loops and task modularity for controlled, high-quality outputs.
+
+Together, these prior works inform our approach to SoftwareDocBot: an interactive explanation system that combines structured schema modeling, contextual retrieval, and large language models to generate accurate, accessible documentation of software systems.
+
+
+\section{Methodology}
+
+The methodology for \textbf{SoftwareDocBot} integrates knowledge graphs and natural language generation to enhance interpretability of SQL-based systems. The overall approach consists of parsing SQL queries, constructing schema-grounded knowledge graphs, retrieving relevant procedural context, and generating natural language explanations using large language models (LLMs).
+
+\subsection{Schema-Grounded Knowledge Graphs}
+
+A key challenge in understanding SQL queries—particularly in complex enterprise systems—is interpreting them in the context of the underlying relational schema. To address this, SoftwareDocBot utilizes a \textbf{Knowledge Graph (KG)} that captures both the structural and semantic properties of the database. The KG serves as the foundation for associating SQL components with human-understandable descriptions.
+
+Two distinct types of knowledge graphs are constructed:
+
+\begin{itemize}
+    \item \textbf{Schema-Level KG}: Represents the static structure of the database, including tables, columns, primary keys, and foreign key relationships.
+    \item \textbf{Query-Level KG}: Represents how individual SQL queries interact with schema elements, capturing context such as joins, filters, and selected columns.
+\end{itemize}
+
+\subsubsection{Motivation for a Query-Aware Knowledge Graph}
+
+Conventional SQL-to-text systems often treat queries as isolated text strings without accounting for their deep integration with database structure. However, SQL queries are inherently bound to the schema, depending on tables, joins, and constraints to execute meaningful operations. Representing these relationships explicitly in a knowledge graph allows the model to reason more effectively about query intent and logic.
+
+
+\subsubsection{Key SQL Query Components for KG Parsing}
+
+From the SQL schema and query, we extract several essential elements required to build the graph. Table~\ref{tab:kg-components} summarizes these key elements and their roles in KG construction.
+
+\begin{table*}[h]
+\centering
+
+\begin{tabular}{|p{4cm}|p{5cm}|p{6cm}|}
+\hline
+\textbf{Component} & \textbf{Description} & \textbf{Role in KG Construction} \\
+\hline
+Tables Accessed & Tables listed in \texttt{FROM}, \texttt{JOIN}, or subqueries & Added as nodes (type: table) \\
+\hline
+Columns Accessed & Columns selected or filtered (e.g., \texttt{SELECT}, \texttt{WHERE}, \texttt{GROUP BY}) & Added as nodes (type: column) \\
+\hline
+Join Conditions & Columns used in \texttt{JOIN ... ON} clauses & Edges: \texttt{JOINED\_WITH}, referencing table-column pairs \\
+\hline
+Selection Filters & Conditions in \texttt{WHERE} or \texttt{HAVING} clauses & Marked on edges to indicate filtering logic \\
+\hline
+Aggregation & Use of functions like \texttt{SUM}, \texttt{AVG}, \texttt{COUNT} & Annotated as attributes on column nodes \\
+\hline
+Ordering/Grouping & Columns in \texttt{ORDER BY} or \texttt{GROUP BY} & Edge annotations or contextual column metadata \\
+\hline
+Query Intent & Query type: retrieval, aggregation, existence check & Set as metadata on the central query node \\
+\hline
+
+\end{tabular}
+\caption{Key SQL Query Components Used for Knowledge Graph Construction}
+\label{tab:kg-components}
+\end{table*}
+
+
+
+\subsubsection{Visualization}
+We provide two levels of knowledge graph visualization:
+Schema-Level Graph : Displays all database tables, their columns, and inter-table relationships. This visualization supports query-independent reasoning (Figure~\ref{fig:schema-graph})
+
+\begin{figure}[h]
+\centering
+\setlength\fboxrule{1pt}  % Border thickness
+\setlength\fboxsep{0pt}   % Padding between image and border
+\fbox{\includegraphics[width=0.5\textwidth]{Schema-level.png}}
+\caption{Schema-level knowledge graph showing tables and their columns, primary/foreign keys.}
+\label{fig:schema-graph}
+\end{figure}
+
+Query-Level Graph :Extracted from individual queries, this graph illustrates the interaction between SQL clauses and schema elements (Figure~\ref{fig:query-graph})
+\begin{figure}[h]
+\centering
+\setlength\fboxrule{1pt}  % Border thickness
+\setlength\fboxsep{0pt}   % Padding between image and border
+\fbox{\includegraphics[width=0.5\textwidth]{Query-level_graph.png}}
+\caption{Query-level graph indicating accessed and referenced columns.}
+\label{fig:query-graph}
+\end{figure}
+
+
+
+These KGs enable SoftwareDocBot to infer relevant entities and improve its explanation quality by attending to relational semantics during generation.
+
+
+
+\subsection{Event-Driven Agentic Workflow }
+A defined agentic workflow is essential to produce desirable results because it provides structure, clarity, and predictability to an otherwise complex or chaotic process.
+\subsubsection{Overview}
+  We defined an agentic workflow that ensures the response aligned with our expectations. Our agentic workflow has three main tasks. The first one is to analyze the user's questions. In this step, the input question is analyzed and broken down into three underlying questions. These enriched questions along with the input question are fed to the retrieval step in which both relevant SQL codes and the schema information such as tables, columns and relationships are retrieved from the vector store and the knowledge graph respectively. Finally, the response to the input question is generated using all relevant content collected iresponsen the workflow. We used the GPT 4o-mini to anlayze the questions and generate the response. In the retrieval step, we used all-MiniLM-L6-v2 model for text embedding model as the retriever and used the t5-small(fine-tuned on SQL data) to generate the SQL query which is used to retrieve the schema information from the knowledge graph. The overview is visualized in Figure ~\ref{fig:Agent_Overview}
+
+\begin{figure*}[h]
+\centering
+\setlength\fboxrule{1pt}  % Border thickness
+\setlength\fboxsep{0pt}   % Padding between image and border
+\fbox{\includegraphics[width=0.8\textwidth]{workflow_high_level.png}}
+\caption{Overview of Agentic Workflow}
+\label{fig:Agent_Overview}
+\end{figure*}
+
+\subsubsection{Implementation}
+
+We have used llama-index framework to implement our agentic workflow. The events and process are depicted in the Figure ~\ref{fig:LLM}
+
+The agentic workflow starts with an initial trigger ("StartEvent"), sets up the system ("set\_ up"), generates questions ("generate\_questions"), and queries data using both RAG and graph-based methods ("rag\_query" and "graph\_query"). It produces a response ("document\_response"), seeks human input if needed ("external\_step"), processes feedback ("get\_feedback"), and either refines the process by looping back to "QueryEvent" or concludes at \_done". The defined structure ensures that each step builds toward a coherent, user-informed outcome, making it adaptable yet purposeful. The detailed workflow is visualized in the following Figure~\ref{fig:LLM}
+
+The set\_up method serves as the starting point of the workflow, activated by a StartEvent. Its primary role is to prepare the system for the tasks ahead by performing any necessary initialization. Specifically, it checks for new documents and embeds them into a vector store if they are present. This embedding process transforms the documents into a format suitable for efficient retrieval later, ensuring the system has access to the most current information. Once this setup is complete, the method triggers the GenerateQuestionsEvent, advancing the workflow to the next step where questions related to the user’s query are generated. The generate\_questions step focuses on creating underlying questions that expand or clarify the user’s original query, guided by the GenerateQuestionsEvent. This process leverages natural language processing techniques to break down the query into more specific or related sub-questions. These generated questions are crucial because they help the system retrieve more targeted and relevant information in subsequent steps. After producing these questions, the method triggers the QueryEvent, passing the questions along to initiate the retrieval phase of the workflow.
+
+In the rag\_query step, triggered by the QueryEvent, the workflow performs a retrieval-augmented generation (RAG) operation to fetch relevant SQL procedures from the vector store. Using the questions generated earlier, it identifies and retrieves SQL procedures that best match the user’s needs, relying on the embeddings stored during the setup phase. Beyond retrieval, this step also sets the stage for gathering additional context by preparing to query a knowledge graph for information about tables and columns related to the retrieved procedures. Once completed, it triggers two events: the ResponseEvent, which moves toward generating a response, and the GraphEvent, which initiates the knowledge graph query for supplementary details.
+
+The graph\_query method, activated by the GraphEvent, is responsible for retrieving detailed information about tables and columns from a knowledge graph. This step enriches the context provided by the SQL procedures retrieved in the previous step by querying a structured database representing the schema or relationships of the data to gather metadata or structural insights. This additional information ensures the system has a comprehensive understanding of the data involved in the SQL procedures. After retrieving this information, the method triggers the ResponseEvent, signaling that the enriched context is ready to be used in crafting a response.
+
+The document\_response step, driven by the ResponseEvent, generates a response to the user’s query by synthesizing the information collected earlier. It combines the SQL procedures retrieved from the vector store with the table and column details from the knowledge graph to produce a coherent and informative answer. This process involves natural language generation to present the response in a clear, user-friendly format. Once the response is prepared, the method triggers the InputRequiredEvent, indicating that the system now requires human input to review or validate the generated response before proceeding further.
+
+The get\_feedback step, initiated by the HumanResponseEvent, handles input from a human reviewer to assess the quality of the generated response. This method processes the feedback, which could either be an acceptance of the response or suggestions for improvement. If the human approves the response, the workflow concludes by triggering the StopEvent, marking the end of the process. However, if the feedback indicates a need for refinement, the method triggers the QueryEvent, looping back to the rag\_query step to adjust and improve the response based on the reviewer’s comments. This iterative mechanism ensures the final output meets the user’s expectations.
+
+\begin{figure*}[h]
+\centering
+\setlength\fboxrule{1pt}  % Border thickness
+\setlength\fboxsep{0pt}   % Padding between image and border
+\fbox{\includegraphics[width=0.8\textwidth]{worflow.png}}
+\caption{Event-Driven Agentic Workflow of SoftwareDocBot}
+\label{fig:LLM}
+\end{figure*}
+
+\subsection{Model Selection and Training}
+
+\subsubsection{Dataset Overview}
+
+For fine-tuning our explanation model, we utilize the \textbf{Gretel Synthetic Text-to-SQL Dataset}, which provides over 80,000 instruction-style examples specifically designed for SQL-to-text generation tasks \cite{gretel2023synthetic}. Each sample includes:
+
+\begin{itemize}
+  \item \texttt{sql\_prompt}: An instruction or directive for generating the explanation.
+  \item \texttt{sql\_context}: Background schema information associated with the query.
+  \item \texttt{sql\_query}: The raw SQL query to be interpreted.
+  \item \texttt{sql\_explanation}: A high-quality and human-readable explanation of the query.
+\end{itemize}
+
+The dataset is particularly well-suited for instruction tuning, as it captures a wide variety of SQL constructs and provides both structural and contextual cues, enabling effective training of models for SQL explainability in real-world scenarios.
+
+\subsubsection{ Model Selection}
+
+For this project, we select the \textbf{TinyLlama-1.1B-Chat-v1.0} model, a lightweight transformer-based architecture optimized for instruction-following and chat-based applications \cite{tinyllama2023chat}.
+
+\textbf{Key advantages include:}
+\begin{itemize}
+  \item Compact parameter size (1.1B), making it suitable for training and deployment on resource-constrained hardware.
+  \item Native support for chat and instruction-response formats, aligning well with our task design.
+  \item High adaptability to domain-specific tasks through supervised fine-tuning.
+\end{itemize}
+
+This model offers an efficient balance between computational feasibility and functional performance for SQL explanation tasks.
+
+\subsubsection{Instruction Fine-Tuning Strategy}
+
+We adopt a \textbf{supervised fine-tuning (SFT)} approach to train the model using the Gretel dataset. Each training sample is formatted as an instruction-response pair to simulate a conversational agent explaining SQL queries. The prompt structure is standardized as follows:
+
+
+\textbf{Training Configuration:}
+\begin{itemize}
+  \item \textbf{Optimizer}: AdamW with a warm-up phase
+  \item \textbf{Scheduler}: Cosine learning rate decay
+  \item \textbf{Precision}: Mixed precision training (FP16) for efficiency
+  \item \textbf{Epochs}: 3 to 5 iterations
+  \item \textbf{Batch Size}: 8-16, depending on GPU capacity
+  \item \textbf{Hardware}: A single NVIDIA A100 GPU (or equivalent)
+\end{itemize}
+
+This setup allows us to train the model effectively on high-quality examples while ensuring practical training times and memory usage. The fine-tuned model is expected to better capture the linguistic and semantic patterns required for explaining SQL queries in a contextually rich and user-friendly manner.
+
+\subsubsection{Text-to-SQL Model: T5-small}
+
+The T5-small model, a compact transformer-based architecture, was selected for its efficiency and proven effectiveness in sequence-to-sequence tasks, such as text-to-SQL generation. Its lightweight design (60 million parameters) makes it suitable for resource-constrained environments while maintaining robust performance for structured data tasks.
+
+The output was the target SQL query, tokenized as a single sequence. The pre-trained T5 tokenizer was used with the following settings:
+
+\begin{itemize}
+    \item \textbf{Maximum Input Length}: 512 tokens, accommodating complex questions and schemas.
+    \item \textbf{Maximum Output Length}: 512 tokens, sufficient for most SQL queries.
+    \item \textbf{Padding}: Enabled to ensure uniform sequence lengths within batches.
+    \item \textbf{Truncation}: Enabled to handle inputs or outputs exceeding the maximum length.
+\end{itemize}
+
+A dynamic padding strategy was implemented using the \textbf{DataCollatorForSeq2Seq} from Hugging Face, which pads sequences within each batch to the length of the longest sequence, optimizing memory usage and training speed.
+
+The T5-small model (google/t5-small-lm-adapt) was fine-tuned using full model fine-tuning, updating all model parameters to maximize performance on the text-to-SQL task. The following techniques were applied:
+
+\begin{itemize}
+    \item \textbf{Full Model Fine-Tuning}: All model weights were updated, as opposed to parameter-efficient methods, to fully adapt the model to the task.
+    \item \textbf{Trainer API}: The Hugging Face \texttt{Trainer} class was used for streamlined training, handling data loading, optimization, and evaluation.
+    \item \textbf{Dynamic Padding}: Enabled via \texttt{DataCollatorForSeq2Seq} to minimize memory overhead.
+    \item \textbf{Mixed-Precision Training}: FP16 (float16) precision was used to reduce memory usage and accelerate training.
+    \item \textbf{Optimizer}: AdamW optimizer with a weight decay of 0.01 to prevent overfitting.
+    \item \textbf{Learning Rate Scheduling}: Linear learning rate decay with 500 warmup steps to stabilize training.
+    \item \textbf{Evaluation}: Enabled generation during evaluation (\texttt{predict\_with\_generate=True}) to assess query generation quality.
+    \item \textbf{Model Saving}: The best-performing model was saved based on validation metrics.
+\end{itemize}
+
+The training settings were configured as follows:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{Parameter} & \textbf{Value} \\
+\midrule
+Batch Size per Device & 16 \\
+Gradient Accumulation Steps & 4 \\
+Learning Rate & 5e-5 \\
+Weight Decay & 0.01 \\
+Number of Epochs & 3 \\
+Warmup Steps & 500 \\
+
+\bottomrule
+\end{tabular}
+\caption{Training settings for T5-small fine-tuning.}
+\label{tab:t5-training-settings}
+\end{table}
+
+The training process was monitored through training and validation loss trends, providing insights into model convergence and generalization:
+
+\begin{itemize}
+    \item \textbf{Initial Phase (0–500 Steps)}: Training loss started at approximately 1.1 and dropped sharply to 0.4, indicating rapid learning. Validation loss began at 0.5 and remained stable, suggesting early adaptation to training data but limited initial generalization.
+    \item \textbf{Mid-Phase (500–2000 Steps)}: Training loss continued to decrease steadily, reaching around 0.35. Validation loss showed slight fluctuations but trended downward to 0.35–0.4, indicating improved generalization.
+    \item \textbf{Final Phase (2000–4000 Steps)}: Both training and validation losses stabilized at approximately 0.35, demonstrating strong convergence and minimal overfitting.
+\end{itemize}
+
+These trends suggest that T5-small effectively learned the text-to-SQL task, achieving reliable performance with good generalization, as evidenced by the close alignment of training and validation losses, shown in Figure~\ref{fig:t5_lc}
+
+\begin{figure}[h]
+\centering
+\setlength\fboxrule{1pt}  % Border thickness
+\setlength\fboxsep{0pt}   % Padding between image and border
+\fbox{\includegraphics[width=0.5\textwidth]{t5_small_sql_loss_plot.png}}
+\caption{Learning curve of T5 Training }
+\label{fig:t5_lc}
+\end{figure}
+
+\subsubsection{SQL-to-Text Model: TinyLlama-1.1B-Chat}
+
+
+The TinyLlama-1.1B-Chat model, a lightweight transformer-based model optimized for chat and instruction-following tasks, was selected for its efficiency and adaptability. With 1.1 billion parameters, it balances performance and resource requirements, making it ideal for SQL-to-text explanation generation.
+
+Inputs were constructed by combining the schema context, SQL query, and user prompt into a single text string, formatted to ensure clarity and consistency. The sql\_context field was parsed and standardized using the sqlglot library to ensure correct schema formatting. The maximum sequence length was set to 2048 tokens to accommodate longer inputs, which often include detailed schemas and complex queries. The output was the target explanation, tokenized similarly.
+
+To ensure resource efficiency, the TinyLlama-1.1B-Chat model was fine-tuned using parameter-efficient techniques, specifically 4-bit quantization and Low-Rank Adaptation (LoRA). The following techniques were applied:
+
+
+
+\begin{itemize}
+    \item \textbf{4-bit Quantization}: Implemented using the bitsandbytes library with NF4 (Normal Float 4-bit) quantization and double quantization for improved compression.
+    \item \textbf{LoRA}: Low-Rank Adaptation was applied to linear layers, with:
+        \begin{itemize}
+            \item Rank (\texttt{r}): 8.
+            \item Alpha: 32.
+            \item Dropout: 0.05.
+        \end{itemize}
+        Only LoRA parameters were updated, keeping the main model weights frozen.
+    \item \textbf{SFTTrainer}: Supervised Fine-Tuning was performed using the \texttt{trl} library from Hugging Face, optimized for instruction tuning.
+    \item \textbf{Mixed-Precision Training}: BFLOAT16 precision was used to handle quantized models efficiently.
+    \item \textbf{Optimizer}: AdamW optimizer with a cosine learning rate scheduler and a warmup ratio of 3\%.
+    \item \textbf{Input Packing}: Multiple sequences were packed into batches to maximize training efficiency.
+\end{itemize}
+
+The training settings were configured as follows:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{Parameter} & \textbf{Value} \\
+\midrule
+Batch Size per Device & 2 \\
+Gradient Accumulation Steps & 4 \\
+Learning Rate & 2e-4 \\
+Warmup Ratio & 3\% \\
+Precision & BFLOAT16 \\
+LoRA Rank & 8 \\
+LoRA Alpha & 32 \\
+LoRA Dropout & 0.05 \\
+Mixed Precision & FP16 \\
+\bottomrule
+\end{tabular}
+\caption{Training settings for TinyLlama-1.1B-Chat fine-tuning.}
+\label{tab:tinyllama-training-settings}
+\end{table}
+
+The training process was monitored through training and validation loss trends, providing insights into model convergence and generalization:
+
+\begin{itemize}
+    \item \textbf{Initial Phase (0–500 Steps)}: Training loss started at approximately 1.1 and decreased rapidly to 0.4, reflecting quick adaptation. Validation loss began at 0.5 and remained stable, indicating initial challenges in generalization.
+    \item \textbf{Mid-Phase (500–2000 Steps)}: Training loss gradually declined, stabilizing at around 0.35. Validation loss mirrored this trend, converging toward 0.35–0.4, suggesting improved generalization.
+    \item \textbf{Final Phase (2000–4000 Steps)}: Both training and validation losses plateaued at approximately 0.35, demonstrating convergence and effective learning.
+\end{itemize}
+
+These trends indicate that TinyLlama-1.1B-Chat effectively learned the SQL-to-text task, achieving reliable performance with good generalization shown in Figure~\ref{fig:tiny_lc}
+
+\begin{figure}[h]
+\centering
+\setlength\fboxrule{1pt}  % Border thickness
+\setlength\fboxsep{0pt}   % Padding between image and border
+\fbox{\includegraphics[width=0.5\textwidth]{tinyllama_sql_explainer_loss_plot.png}}
+\caption{Learning curve of TinyLlama Training }
+\label{fig:tiny_lc}
+\end{figure}
+
+\section{Evaluation and Metrics}
+
+The primary objective of our evaluation is to assess the effectiveness, clarity, and reliability of natural language explanations generated by \textbf{SoftwareDocBot}. To this end, we align our evaluation framework with the core research questions outlined in Section~1.3. These questions guide both qualitative analysis and quantitative benchmarking.
+
+\begin{itemize}
+  \item \textbf{Comprehension Utility:} To what extent does the agentic workflow improve the metrics?
+  
+  \item \textbf{Schema Awareness via Knowledge Graphs:} Does integrating a schema-derived knowledge graph improve the metrics?
+
+  \item \textbf{Fine-Tuning Efficacy:} Does instruction fine-tuning on domain-specific standard answers synthesized with GPT-4o-mini significantly enhance explanation accuracy compared to general-purpose language models?
+\end{itemize}
+
+
+
+\subsection{Evaluation Setup}
+
+We have selected a database schema and SQL store procedure, which is a self-built schema. This schema is the data model of a onine space renting platform. We construct a custom test suite consisting of 50 user queries of about the software system. For each query, explanations are generated using all three models listed below.
+
+
+To evaluate the relative performance of SoftwareDocBot, we compare its outputs against the current state-of-the-art general-purpose model, \textbf{ChatGPT 4o-mini}, which serves as the judge for natural language generation quality in reasoning tasks.
+
+The following models are included in our evaluation pipeline:
+
+\begin{itemize}
+  \item \textbf{ChatGPT 4o-mini}: A leading commercial LLM used to produce the standard answers.
+  \item \textbf{llama-3.1-8b-instant}: A moderately performing model to do ablation studies based on the standard answers.
+  \item \textbf{TinyLlama (finetuned)}:  The lightweight model instruction-tuned task-specific adaptation.
+\end{itemize}
+
+
+\subsection{Quantitative Metrics}
+
+For each user query of our standard answers, we generate explanations using:
+
+\begin{itemize}
+  \item \textbf{BLEU Score:} Measures the n-gram precision overlap between generated and reference explanations, capturing fluency and lexical similarity.
+
+  \item \textbf{ROUGE-L:} Evaluates recall-oriented similarity by comparing the longest common subsequences between generated and reference texts.
+
+  \item \textbf{METEOR:} Considers synonymy, stemming, and paraphrasing for more semantically aware evaluation beyond surface-form matching.
+\end{itemize}
+
+These metrics provide a comprehensive view of both surface-level fidelity and deeper semantic alignment. Through this multi-faceted evaluation, we aim to validate the utility of our knowledge-graph-integrated agentic workflow and its ability to support practical comprehension of SQL-driven software systems.
+
+
+\subsection{Evaluation Results}
+To answer our research questions, we have used the llama-3.1-8b-instant model for ablation studies and fine-tuned the TinyLlama model. We have tested four different scenarios as follows:
+\begin{itemize}
+    \item \textbf{Scenario 1} - A simple RAG where the answers are generated from direct retrieval of user questions.
+    \item \textbf{Scenario 2} - The agentic workflow with no information from the knowledge graph
+    \item \textbf{Scenario 3} - The complete workflow where the answers are generated using our agentic workflow
+    \item \textbf{Scenario 4} - The complete workflow in which the explanation task is performed by the fine-tuned model.
+\end{itemize}
+
+For the first three scenarios, we used the llama-3.1-8b-instant model for text generation, while the last one employed the fine-tuned model.  
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Scenarios} & \textbf{BLEU} & \textbf{ROUGE-L} & \textbf{METEOR} \\
+\midrule
+Secnario 1 & 0.0979 & 0.2633 & 0.3211 \\
+Secnario 2 & 0.1263 & 0.2750 & 0.3284 \\
+Secnario 3 & 0.1291 & 0.2847 & 0.3318 \\
+Secnario 4 & 0.4210 & 0.5407 & 0.5381 \\
+\bottomrule
+\end{tabular}
+\centering
+\caption{Ablation Studies and performance comparison of the workflow}
+\label{tab:model-scores}
+\end{table}
+
+
+\begin{figure}[h]
+\centering
+\setlength\fboxrule{1pt}  % Border thickness
+\setlength\fboxsep{0pt}   % Padding between image and border
+\fbox{\includegraphics[width=0.5\textwidth]{evaluation_metrics.png}}
+\caption{Performance comparison of the ablation studies of the workflow }
+\label{fig:eval_score}
+\end{figure}
+
+The evaluation results shown in Table~\ref{tab:model-scores} and Figure~\ref{fig:eval_score}  demonstrate a certain progression in performance across the workflows, with two key findings: small but consistent improvements from Simple RAG to No Graph to Complete Workflow, and a dramatic enhancement with the Trained Model approach.
+
+The Simple RAG workflow, with scores of BLEU 0.0979, ROUGE-L 0.2633, and METEOR 0.3211, relies on retrieving text chunks from database schema documentation or similar sources. This approach can introduce noise or insufficient context, as the retrieved chunks may contain irrelevant details or lack critical schema information, leading to inaccuracies or hallucinations in the generated explanations. 
+
+The workflow without the knowledge, scoring BLEU 0.1263, ROUGE-L 0.2750, and METEOR 0.3284, shows noticeable improvements, with relative gains of 29.01\% in BLEU, 4.44\% in ROUGE-L, and 2.27\% in METEOR. This suggests that the workflow contributes noticeable improvements. The improvement in BLEU indicates enhanced precision, while the modest gains in ROUGE-L and METEOR suggest slight improvements in recall and overall response quality.
+
+The Complete Workflow shows small improvements, with relative gains of 2.22\% in BLEU, 3.53\% in ROUGE-L, and 1.04\% in METEOR. These modest increases indicate that the structured representation provided by the knowledge graph enhances the chatbot’s ability to generate coherent and accurate responses, particularly for queries requiring an understanding of schema relationships. The slightly higher ROUGE-L score suggests improved recall, likely due to the knowledge graph’s ability to provide comprehensive context, while the METEOR increase reflects better alignment with human judgment.
+
+The most significant performance leap is observed with the Complete Workflow with Trained Model, achieving BLEU 0.4210, ROUGE-L 0.5407, and METEOR 0.5381. This approach builds on the Complete Workflow by incorporating instruction tuning, where the LLM is fine-tuned on the synthesized standard answers. This customization aligns the model closely with the task requirements, enabling it to generate responses that closely match expected business logic explanations. The dramatic improvements—226.1\% in BLEU, 89.92\% in ROUGE-L, and 62.18\% in METEOR—underscore the transformative impact of tailored training. Instruction tuning likely reduces hallucinations and enhances the model’s understanding of domain-specific terminology and logic, resulting in highly accurate and relevant responses.
+
+\subsection{Research Questions}
+
+Summarized in Table~\ref{tab:relative-gains}, the evaluation demonstrates small but consistent improvements across all metrics as the workflow progresses. Simple RAG’s reliance on basic retrieval of text chunks is less effective than the Complete Workflow’s.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Scenarios} & \textbf{BLEU} & \textbf{ROUGE-L} & \textbf{METEOR} \\
+\midrule
+1 - 2 & 29.01\% & 4.44\% & 2.27\% \\
+2 - 3 & 2.22\% & 3.53\% & 1.04\% \\
+3 - 4 & 226.1\% & 89.92\% & 62.18\% \\
+\bottomrule
+\end{tabular}
+\centering
+\caption{Relative gains between scenarios}
+\label{tab:relative-gains}
+\end{table}
+
+The agentic workflow improves explanation quality over Simple RAG by 31.87\% in BLEU, 8.13\% in ROUGE-L, and 3.33\% in METEOR, reflecting significant gains in precision and response quality. These gains reflect our research question 1.
+
+Utilizing a knowledge graph for schema representation enhances the system’s ability to explain query logic and structure, as evidenced by improvements of 2.22\% in BLEU, 3.53\% in ROUGE-L, and 1.04\% in METEOR from the workflow without the knowledge graph to Complete Workflow. These gains reflect our research question 2.
+
+Fine-tuning on domain-specific data greatly improves explanation quality, with increases of 226.11\% in BLEU, 89.93\% in ROUGE-L, and 62.19\% in METEOR. These substantial improvements highlight the critical role of tailored training in enhancing the chatbot’s ability to generate accurate and relevant explanations, aligning with research on the benefits of fine-tuning for specialized tasks.
+
+\section{Discussion}
+
+The evaluation results demonstrate a progression in the quality of natural language explanations generated across the tested workflows, underscoring the effectiveness of combining structured data processing with domain-specific model customization. The improvements in BLEU, ROUGE-L, and METEOR metrics from the Simple RAG to the Complete Workflow with Trained Model highlight the critical roles of the agentic workflow, knowledge graph integration, and fine-tuning in achieving high-quality outpu
+
+However, the evaluation also reveals limitations that warrant further exploration. The current knowledge graph, while effective for static schema representation, may not fully capture the dynamic business logic embedded in SQL procedures, such as stored procedures or triggers. This limitation could affect the system’s ability to explain complex business rules comprehensively. Additionally, the evaluation is based on a specific dataset—a self-built schema for an online space renting platform—which may not generalize to all SQL-based systems. Testing on diverse databases and query types would provide a more robust assessment of its capabilities.
+
+From a practical perspective, SoftwareDocBot has the potential to streamline communication between developers and business users by providing clear, natural language explanations of complex SQL logic and database structures. This can lead to more efficient system maintenance, improved understanding of business processes, and enhanced collaboration across technical and non-technical teams. For developers, the system offers a tool to quickly generate documentation, reducing the burden of manual explanation. For business users, it provides accessible insights into how data supports their workflows, fostering greater engagement with software systems.
+
+In summary, SoftwareDocBot shows potential in automated software documentation, particularly for SQL-based systems. Its combination of structured knowledge representation and fine-tuned LLMs addresses key challenges in bridging technical and business understanding. The evaluation results confirm its effectiveness, but ongoing development is needed to address limitations and expand its applicability.
+
+\section{Future Work}
+
+This project provides avenues for future research and development to enhance its capabilities and broaden its impact in software documentation.
+
+\begin{enumerate}
+    \item \textbf{Enhanced Schema Understanding}: The current knowledge graph effectively represents static schema structures but may not fully capture the nuanced business logic encoded in SQL procedures. Future work could explore advanced techniques, such as program analysis or formal methods, to extract and represent complex business rules, improving the system’s ability to explain intricate SQL constructs.
+
+     \item \textbf{Utilizing software codes}: The current workflow focuses on the SQL to extract business logic. Beyond the SQL schema, the business logc can be embedded in the software code and so they can be used a context in the response generation.
+
+    \item \textbf{Evaluation on Diverse Datasets}: The current evaluation, based on a single dataset, provides valuable insights but may not generalize across all SQL-based systems. Testing SoftwareDocBot on a broader range of databases and query types would validate its robustness and identify domain-specific limitations.
+
+    \item \textbf{User Studies}: Conducting qualitative user studies with both technical and non-technical stakeholders could provide deeper insights into the system’s effectiveness and usability. Understanding user interactions and preferences would guide further refinements to the explanation generation process.
+
+    \item \textbf{Natural Language Interfaces for SQL}: Leveraging recent advancements in natural language processing for SQL query generation could enable SoftwareDocBot to assist users in creating new queries based on natural language inputs, in addition to explaining existing ones. This would further bridge the gap between technical and non-technical users, enhancing the system’s utility.
+
+\end{enumerate}
+
+By pursuing these directions, SoftwareDocBot can evolve into a more robust, versatile, and user-friendly tool, solidifying its role in facilitating effective communication and understanding in software development.
+
+\section{Conclusion}
+
+SoftwareDocBot shows a meaningful utilization in the automation of software documentation for SQL-based systems, offering a powerful solution to bridge the communication gap between technical and non-technical stakeholders. By integrating knowledge graphs, retrieval-augmented generation, and a fine-tuned TinyLlama model, the system generates clear, contextual explanations of database schemas and SQL queries that are accessible to diverse audiences.
+
+The evaluation results validate the effectiveness of this approach, with the Complete Workflow with Trained Model achieving remarkable improvements of 226.11\% in BLEU, 89.93\% in ROUGE-L, and 62.19\% in METEOR over the baseline Complete Workflow. These gains, coupled with the agentic workflow’s 31.87\% BLEU improvement over Simple RAG and the knowledge graph’s 2.22\% BLEU enhancement over No Graph, confirm that a structured, domain-specific approach is essential for producing accurate and relevant documentation in complex software environments.
+
+Looking forward, opportunities to enhance SoftwareDocBot include utilizing software codes and conducting broader evaluations to ensure generalizability. By continuing to innovate in these areas, SoftwareDocBot has the potential to foster improved communication, deeper understanding, and enhanced collaboration across all stakeholders. In summary, SoftwareDocBot not only addresses a need in software documentation but also brige the gap between technical users and non-technical users.
+
+\bibliographystyle{acl_natbib}
+
+\bibliography{acl_references_all}
+
+
+
+
+
+
+
+
+
+\end{document}
+
