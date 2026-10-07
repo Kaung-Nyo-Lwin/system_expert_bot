@@ -1,97 +1,144 @@
-from flask import Flask, request, jsonify, send_from_directory
-from flask_cors import CORS  # <- add this
-from model_engine import generate_response
-from docgen import create_doc
-import os
-import openai
-import agent
+"""HTTP boundary for the local demo and opt-in research models."""
 import asyncio
-from sql_model_pipeline import generate_sql, generate_explanation
+import json
+import os
+from pathlib import Path
+
+from dotenv import load_dotenv
+from flask import Flask, jsonify, request, send_from_directory
+from flask_cors import CORS
+from werkzeug.exceptions import HTTPException
+
+from .analysis import analyze_sql, parse_schema
+from .docgen import create_doc
+from .errors import ServiceUnavailable
+
+BASE_DIR = Path(__file__).resolve().parent
+load_dotenv(BASE_DIR.parents[1] / ".env")
+EXAMPLES = json.loads((BASE_DIR / "examples.json").read_text())
 
 
-app = Flask(__name__)
-# CORS(app)  # <- allow all origins (React, etc.)
-CORS(app)
-
-app.config["UPLOAD_FOLDER"] = "static/docs"
-
-@app.route("/api/message", methods=["POST"])
-def chat():
-    user_input = request.json["user_input"]
-
-    if user_input.strip().lower() == "show graph":
-        nodes = [
-            {"id": 1, "label": "Node 1"},
-            {"id": 2, "label": "Node 2"},
-            {"id": 3, "label": "Node 3"}
-        ]
-        edges = [
-            {"from": 1, "to": 2},
-            {"from": 1, "to": 3}
-        ]
-        return jsonify({
-            "response": "Here’s your graph visualization!",
-            "nodes": nodes,
-            "edges": edges,
-            "doc_path": None
-        })
-    # nodes = []
-    # edges = []
-
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    response, nodes, edges = loop.run_until_complete(generate_response(user_input))
-    print("Checking Responce",response)
-    if response.replace("```markdown","").replace("```","").strip()== "Not enough information":
-        nodes, edges = [], []
-    doc_filename = create_doc(response)
-    #nodes = [{"color": "#FFAAAA", "id": "query_7461764137375118208", "label": "Query", "shape": "box"}, {"color": "#AAAAFF", "id": "table_location", "label": "location", "shape": "dot"}, {"color": "#AAFFAA", "id": "column_museum_object.title", "label": "title\n(museum_object)", "shape": "dot"}, {"color": "#AAFFAA", "id": "column_museum_object.id", "label": "id\n(museum_object)", "shape": "dot"}, {"color": "#AAFFAA", "id": "column_attribute.art_style", "label": "art_style\n(attribute)", "shape": "dot"}, {"color": "#AAFFAA", "id": "column_location.country", "label": "country\n(location)", "shape": "dot"}, {"color": "#AAFFAA", "id": "column_attribute.object_id", "label": "object_id\n(attribute)", "shape": "dot"}, {"color": "#AAFFAA", "id": "column_location.id", "label": "id\n(location)", "shape": "dot"}, {"color": "#AAFFAA", "id": "column_attribute.material", "label": "material\n(attribute)", "shape": "dot"}, {"color": "#AAAAFF", "id": "table_attribute", "label": "attribute", "shape": "dot"}, {"color": "#AAAAFF", "id": "table_museum_object", "label": "museum_object", "shape": "dot"}]    # doc_filename = create_doc(user_input, response)
-    #edges = [{"arows": "to", "color": "green", "from": "table_attribute", "label": "REFERENCES", "to": "table_museum_object"}, {"arrows": "to", "color": "red", "dashes": False, "from": "column_museum_object.id", "label": "JOINED_WITH", "to": "column_attribute.object_id"}, {"arrows": "to", "color": "blue", "from": "query_7461764137375118208", "label": "ACCESSES", "to": "table_location"}, {"arrows": "to", "color": "blue", "from": "query_7461764137375118208", "label": "ACCESSES", "to": "table_attribute"}, {"arrows": "to", "color": "blue", "from": "query_7461764137375118208", "label": "ACCESSES", "to": "table_museum_object"}, {"arrows": "to", "color": "green", "from": "query_7461764137375118208", "label": "REFERENCES", "to": "column_location.country"}, {"arrows": "to", "color": "green", "from": "query_7461764137375118208", "label": "REFERENCES", "to": "column_attribute.art_style"}, {"arrows": "to", "color": "green", "from": "query_7461764137375118208", "label": "REFERENCES", "to": "column_attribute.material"}, {"arrows": "to", "color": "green", "from": "query_7461764137375118208", "label": "REFERENCES", "to": "column_location.id"}, {"arrows": "to", "color": "green", "from": "query_7461764137375118208", "label": "REFERENCES", "to": "column_attribute.object_id"}, {"arrows": "to", "color": "green", "from": "query_7461764137375118208", "label": "REFERENCES", "to": "column_museum_object.id"}, {"arrows": "to", "color": "green", "from": "query_7461764137375118208", "label": "REFERENCES", "to": "column_museum_object.title"}]
-    
-    return jsonify({
-        "response": response,
-        "nodes": nodes,
-        "edges": edges,
-        
-        "doc_path": f"static/docs/{doc_filename}" if response else None
-    })
-
-# ================= NEW ENDPOINT 1 =================
-@app.route("/api/generate-sql", methods=["POST"])
-def api_generate_sql():
-    data = request.json
-    question = data.get("question", "")
-    schema_context = data.get("schema", "")
-
-    if not question or not schema_context:
-        return jsonify({"error": "Question and schema context required."}), 400
-
-    try:
-        sql_query = generate_sql(question, schema_context)
-        return jsonify({"output": sql_query})
-    except Exception as e:
-        print(f"Error generating SQL: {e}")
-        return jsonify({"error": str(e)}), 500 
-# ================= NEW ENDPOINT 2 =================
+def normalize(value):
+    return " ".join(value.casefold().rstrip("?.!").split())
 
 
-@app.route("/api/generate-explanation", methods=["POST"])
-def api_generate_explanation():
+def create_app(config=None):
+    app = Flask(__name__, static_folder=None)
+    app.config.from_mapping(
+        APP_MODE=os.getenv("APP_MODE", "demo"),
+        DOCS_DIR=BASE_DIR / "static" / "docs",
+        MAX_CONTENT_LENGTH=64 * 1024,
+    )
+    if config:
+        app.config.update(config)
+    if app.config["APP_MODE"] not in {"demo", "live"}:
+        raise ValueError("APP_MODE must be demo or live.")
+    origins = os.getenv("CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173")
+    CORS(app, resources={r"/api/*": {"origins": origins.split(",")}})
 
-    data = request.json
-    schema = data.get("schema", "")
-    question = data.get("question", "")
-    sql_query = data.get("query", "")
+    def payload(*fields):
+        data = request.get_json(silent=True)
+        if not isinstance(data, dict):
+            raise ValueError("Send a JSON object with the required fields.")
+        for field in fields:
+            if not isinstance(data.get(field), str) or not data[field].strip():
+                raise ValueError(f"{field.capitalize()} is required and must be text.")
+            if len(data[field]) > 20000:
+                raise ValueError(f"{field.capitalize()} must be under 20,000 characters.")
+        return {field: data[field].strip() for field in fields}
 
-    if not schema or not question or not sql_query:
-        return jsonify({"error": "Schema, question, and SQL query required."}), 400
+    def run_live(function, *args):
+        try:
+            return function(*args)
+        except (ImportError, FileNotFoundError) as exc:
+            raise ServiceUnavailable(
+                "Live models are not configured. See docs/SETUP.md or use APP_MODE=demo."
+            ) from exc
 
-    try:
-        explanation = generate_explanation(schema, question, sql_query)
-        return jsonify({"output": explanation})
-    except Exception as e:
-        print(f"Error generating explanation: {e}")
-        return jsonify({"error": str(e)}), 500
+    @app.get("/api/health")
+    def health():
+        return jsonify(status="ok", mode=app.config["APP_MODE"], version="2.0.0")
+
+    @app.get("/api/examples")
+    def examples():
+        return jsonify(examples=EXAMPLES)
+
+    @app.post("/api/message")
+    def message():
+        data = payload("user_input")
+        if app.config["APP_MODE"] == "demo":
+            example = next((item for item in EXAMPLES if normalize(item["question"]) == normalize(data["user_input"])), None)
+            if example is None:
+                return jsonify(error="Choose one of the three sample questions in demo mode. For your own SQL, use SQL explainer."), 422
+            analysis = analyze_sql(example["schema"], example["query"])
+            response = example["explanation"]
+            nodes, edges = analysis["nodes"], analysis["edges"]
+            sources = example["sources"]
+        else:
+            def answer():
+                from .model_engine import generate_response
+                return asyncio.run(generate_response(data["user_input"]))
+            response, nodes, edges = run_live(answer)
+            sources = []
+        filename = create_doc(response, app.config["DOCS_DIR"])
+        return jsonify(response=response, nodes=nodes, edges=edges, sources=sources,
+                       doc_path=f"/api/documents/{filename}", mode=app.config["APP_MODE"])
+
+    @app.post("/api/generate-sql")
+    def generate_sql():
+        data = payload("question", "schema")
+        if app.config["APP_MODE"] == "demo":
+            example = next((item for item in EXAMPLES if normalize(item["question"]) == normalize(data["question"])), None)
+            if example is None or parse_schema(data["schema"]) != parse_schema(example["schema"]):
+                return jsonify(error="Demo generation uses the three bundled question/schema pairs. Load a sample, or configure the T5 checkpoint for live generation."), 422
+            output = example["query"]
+        else:
+            def generate():
+                from .sql_model_pipeline import generate_sql as model_generate
+                return model_generate(data["question"], data["schema"])
+            output = run_live(generate)
+        return jsonify(output=output, mode=app.config["APP_MODE"])
+
+    @app.post("/api/generate-explanation")
+    def generate_explanation():
+        data = payload("schema", "question", "query")
+        if app.config["APP_MODE"] == "demo":
+            result = analyze_sql(data["schema"], data["query"])
+        else:
+            def explain():
+                from .sql_model_pipeline import generate_explanation as model_explain
+                return model_explain(data["schema"], data["question"], data["query"])
+            result = {"output": run_live(explain), "nodes": [], "edges": []}
+        filename = create_doc(result["output"], app.config["DOCS_DIR"])
+        return jsonify(**result, doc_path=f"/api/documents/{filename}", mode=app.config["APP_MODE"])
+
+    @app.get("/api/documents/<filename>")
+    def document(filename):
+        if not filename.endswith(".docx"):
+            return jsonify(error="Document not found."), 404
+        return send_from_directory(app.config["DOCS_DIR"], filename, as_attachment=True)
+
+    @app.errorhandler(ValueError)
+    def invalid_input(error):
+        return jsonify(error=str(error)), 400
+
+    @app.errorhandler(ServiceUnavailable)
+    def unavailable(error):
+        return jsonify(error=str(error)), 503
+
+    @app.errorhandler(HTTPException)
+    def http_error(error):
+        return jsonify(error=error.description), error.code
+
+    @app.errorhandler(Exception)
+    def unexpected(error):
+        app.logger.exception("Request failed")
+        return jsonify(error="The request could not be completed. Check the server logs and model configuration."), 500
+
+    return app
+
+
+app = create_app()
+
 if __name__ == "__main__":
-    app.run(debug=True, port=8000)
-
+    app.run(host="127.0.0.1", port=int(os.getenv("PORT", "8000")), debug=False)

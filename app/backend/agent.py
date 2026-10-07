@@ -22,10 +22,10 @@ from llama_index.core import SimpleDirectoryReader, Document
 from llama_index.llms.openai import OpenAI
 # from llama_index.embeddings.openai import OpenAIEmbedding
 # from llama_index.utils.workflow import draw_all_possible_flows
-from langchain.embeddings import HuggingFaceEmbeddings
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from langchain_groq import ChatGroq
 from dotenv import load_dotenv
-import knowledge_graph_pipeline as pipeline
+from . import knowledge_graph_pipeline as pipeline
 
 class GenerateQuestionsEvent(Event):
     """Triggered after setup, contains the original user query and a list of follow‑up questions."""
@@ -75,15 +75,15 @@ class SoftwareDocBot(Workflow):
             model="llama-3.1-8b-instant",
             temperature=0,
             max_tokens=None,
-            timeout=None,
+            timeout=60,
             max_retries=2,
-        )
-        self.llm_openai = OpenAI(model="gpt-4o-mini")
+        ) if model == "groq" else None
+        self.llm_openai = OpenAI(model="gpt-4o-mini") if model == "4o-mini" or evaluate or mode == "no_graph" else None
         # self.embedding_model = HuggingFaceInstructEmbeddings(
         #     model_name = 'hkunlp/instructor-base'
         # )
 
-        self.embedding_model = HuggingFaceEmbeddings(
+        self.embedding_model = HuggingFaceEmbedding(
             model_name="sentence-transformers/all-MiniLM-L6-v2"
         )
         self.model = model
@@ -92,12 +92,12 @@ class SoftwareDocBot(Workflow):
         # -------- constants ------------------------------------------------------
         self.storage_dir: str = storage_dir
         self.data_dir: str = data_dir  # directory containing *.sql files to embed
-        self.kg_viz = "",""
+        self.kg_viz = [], []
         self.loaded_knowledge_graph = pipeline.load_kg_graphml(kg_graph)
 
     def _generate(self, prompt: str) -> str:
         if self.model == "groq":
-            return self.llm_groq.predict(prompt)
+            return self.llm_groq.invoke(prompt).content
         elif self.model == "4o-mini":
             return self.llm_openai.complete(prompt).text
         else:

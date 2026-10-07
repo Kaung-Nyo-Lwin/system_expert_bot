@@ -1,0 +1,38 @@
+[
+  {
+    "id": "revenue",
+    "title": "Monthly revenue",
+    "category": "Financial reporting",
+    "question": "How is monthly revenue calculated?",
+    "query": "SELECT\n  YEAR(b.endTime) AS year,\n  MONTH(b.endTime) AS month,\n  SUM(b.spacePrice) AS space_revenue,\n  SUM(b.sysFee) AS platform_fees,\n  SUM(b.total) AS total_revenue\nFROM booking AS b\nINNER JOIN rent AS r ON r.bid = b.id\nWHERE b.status = 'completed'\n  AND b.endTime >= '2025-01-01'\n  AND b.endTime < '2026-01-01'\nGROUP BY YEAR(b.endTime), MONTH(b.endTime)\nORDER BY year, month;",
+    "explanation": "## From completed bookings to monthly revenue\nThis sample summarizes the revenue-reporting logic in `sp_MonthlyRevenue`. It is a prepared walkthrough of the bundled OurSpace dataset.\n\n### How it works\n1. Join `booking` with `rent` using the booking ID. Only bookings with a matching rental are included.\n2. Keep completed bookings within the requested end-date range.\n3. Group by the year and month of each booking's end time.\n4. Sum space charges, platform fees, and the total amount separately.\n\n### What the business sees\nOne row per month with rental activity, containing space revenue, platform fees, and total revenue. Months with no matching bookings are absent.\n\n### A detail worth checking\nThe join can count a booking more than once if multiple rental records reference it. Confirm the intended relationship before using the total in a financial report.\n\nThe demo query is a simplified adaptation: it uses numeric months, an explicit 2025 date range, and chronological ordering.",
+    "sources": [
+      "sp_MonthlyRevenue.txt"
+    ],
+    "schema": "CREATE TABLE user (\n  id INT PRIMARY KEY,\n  name VARCHAR(100)\n);\nCREATE TABLE space (\n  id INT PRIMARY KEY,\n  name VARCHAR(100),\n  location VARCHAR(100),\n  hourlyRate DECIMAL(10,2)\n);\nCREATE TABLE booking (\n  id INT PRIMARY KEY,\n  cid INT,\n  sid INT,\n  endTime DATETIME,\n  status VARCHAR(20),\n  spacePrice DECIMAL(10,2),\n  sysFee DECIMAL(10,2),\n  total DECIMAL(10,2),\n  FOREIGN KEY (cid) REFERENCES user(id),\n  FOREIGN KEY (sid) REFERENCES space(id)\n);\nCREATE TABLE rent (\n  id INT PRIMARY KEY,\n  bid INT,\n  FOREIGN KEY (bid) REFERENCES booking(id)\n);"
+  },
+  {
+    "id": "spaces",
+    "title": "Popular spaces",
+    "category": "Booking analytics",
+    "question": "Which spaces have the most completed bookings?",
+    "query": "SELECT\n  s.name AS space_name,\n  COUNT(b.id) AS completed_bookings\nFROM space AS s\nINNER JOIN booking AS b ON b.sid = s.id\nWHERE b.status = 'completed'\nGROUP BY s.id, s.name\nORDER BY completed_bookings DESC\nLIMIT 5;",
+    "explanation": "## Find the spaces people book most\nThis illustrative query uses the bundled OurSpace schema to rank spaces by completed bookings. It is a prepared demo, not a retrieved model answer.\n\n### How it works\n1. Join `space` and `booking` on the space ID.\n2. Filter out bookings that are not completed.\n3. Count bookings for each space. Grouping by the ID keeps spaces with the same name separate.\n4. Sort by booking count and keep the first five rows.\n\n### What the business sees\nUp to five spaces with their completed booking counts. Spaces without completed bookings are excluded by the inner join and filter.\n\n### A detail worth checking\nNo date filter is applied, so the ranking covers all recorded time. Add a date range for a monthly report. Equal counts have no guaranteed tie order.",
+    "sources": [
+      "TransacAndQuery_DataScape.sql"
+    ],
+    "schema": "CREATE TABLE user (\n  id INT PRIMARY KEY,\n  name VARCHAR(100)\n);\nCREATE TABLE space (\n  id INT PRIMARY KEY,\n  name VARCHAR(100),\n  location VARCHAR(100),\n  hourlyRate DECIMAL(10,2)\n);\nCREATE TABLE booking (\n  id INT PRIMARY KEY,\n  cid INT,\n  sid INT,\n  endTime DATETIME,\n  status VARCHAR(20),\n  spacePrice DECIMAL(10,2),\n  sysFee DECIMAL(10,2),\n  total DECIMAL(10,2),\n  FOREIGN KEY (cid) REFERENCES user(id),\n  FOREIGN KEY (sid) REFERENCES space(id)\n);\nCREATE TABLE rent (\n  id INT PRIMARY KEY,\n  bid INT,\n  FOREIGN KEY (bid) REFERENCES booking(id)\n);"
+  },
+  {
+    "id": "customers",
+    "title": "Customer spending",
+    "category": "Customer insights",
+    "question": "Who are the highest-spending customers?",
+    "query": "SELECT\n  u.name AS customer_name,\n  SUM(b.total) AS total_spent\nFROM user AS u\nINNER JOIN booking AS b ON b.cid = u.id\nWHERE b.status = 'completed'\nGROUP BY u.id, u.name\nORDER BY total_spent DESC\nLIMIT 10;",
+    "explanation": "## Understand customer spending\nThis illustrative query uses the OurSpace schema to rank customers by their completed booking totals. It is a prepared demo, not a live database report.\n\n### How it works\n1. Match each customer in `user` to their bookings using `booking.cid`.\n2. Include only completed bookings.\n3. Sum `booking.total` for each customer, grouping by both ID and name.\n4. Sort from highest to lowest spending and return up to ten customers.\n\n### What the business sees\nA customer name and cumulative booking total for each result. Customers without completed bookings are not included.\n\n### A detail worth checking\nBooking totals are not necessarily settled payments. Refunds, payment status, and currency conversion are outside this example. Equal totals have no guaranteed tie order.",
+    "sources": [
+      "TransacAndQuery_DataScape.sql"
+    ],
+    "schema": "CREATE TABLE user (\n  id INT PRIMARY KEY,\n  name VARCHAR(100)\n);\nCREATE TABLE space (\n  id INT PRIMARY KEY,\n  name VARCHAR(100),\n  location VARCHAR(100),\n  hourlyRate DECIMAL(10,2)\n);\nCREATE TABLE booking (\n  id INT PRIMARY KEY,\n  cid INT,\n  sid INT,\n  endTime DATETIME,\n  status VARCHAR(20),\n  spacePrice DECIMAL(10,2),\n  sysFee DECIMAL(10,2),\n  total DECIMAL(10,2),\n  FOREIGN KEY (cid) REFERENCES user(id),\n  FOREIGN KEY (sid) REFERENCES space(id)\n);\nCREATE TABLE rent (\n  id INT PRIMARY KEY,\n  bid INT,\n  FOREIGN KEY (bid) REFERENCES booking(id)\n);"
+  }
+]

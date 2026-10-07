@@ -1,30 +1,29 @@
-from memory_store import chat_history
+"""Load the original agent only when a live request needs it."""
 import os
-import openai
-import agent
-import knowledge_graph_pipeline as pipeline
-OPENAI_API_KEY = ""
-os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
-openai.api_key = os.environ['OPENAI_API_KEY']
-Groq_API_KEY = ""
+from pathlib import Path
 
-os.environ["GROQ_API_KEY"] = Groq_API_KEY
+from .errors import ServiceUnavailable
 
-w = agent.SoftwareDocBot(
-    storage_dir="ourspace_index", 
-    data_dir="ourspace", 
-    kg_graph="ourspace_sql_knowledge_graph",
-    model="4o-mini", 
-    timeout=600,
-    verbose=True)
+BASE_DIR = Path(__file__).resolve().parent
 
 
 async def generate_response(user_input):
-    response = await agent.answer_question(w, user_input)
-    # response = f"The SQL retrieves {random.choice(['sales data', 'user profile', 'analytics'])}."
-    chat_history.append({'user': user_input, 'bot': response})
-    print("checking W.kg_viz:",w.kg_viz)
-    nodes, edges = w.kg_viz
-    #pdf_filename = create_pdf( bot_response=response) 
-    #print(f"Parsing generated SQL query: {kg_viz}")
+    provider = os.getenv("LLM_PROVIDER", "groq")
+    if provider not in {"groq", "4o-mini"}:
+        raise ServiceUnavailable("LLM_PROVIDER must be groq or 4o-mini.")
+    key = "GROQ_API_KEY" if provider == "groq" else "OPENAI_API_KEY"
+    if not os.getenv(key):
+        raise ServiceUnavailable(f"Set {key} in .env to enable live chat.")
+
+    from .agent import SoftwareDocBot, answer_question
+
+    # Each request owns its workflow and graph; visitors never share conversation state.
+    workflow = SoftwareDocBot(
+        storage_dir=str(BASE_DIR / "ourspace_index"),
+        data_dir=str(BASE_DIR / "ourspace"),
+        kg_graph=str(BASE_DIR / "ourspace_sql_knowledge_graph"),
+        model=provider, timeout=120, verbose=False,
+    )
+    response = await answer_question(workflow, user_input)
+    nodes, edges = workflow.kg_viz
     return response, nodes, edges

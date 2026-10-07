@@ -1,20 +1,24 @@
-# .gitignore
-# Ignore all .pyc files
-*.pyc
-
-# Ignore __pycache__ folders
+.env
+.env.*
+!.env.example
 __pycache__/
-*/__pycache__/
-
-# Ignore node_modules everywhere
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
 node_modules/
-app/frontend/node_modules/
-
-# Also for backend cache
-app/backend/__pycache__/
-app/backend/*.pyc
-
-/app/backend/static/
-/app/backend/fine-tuned-t5-small-sql/
-/app/backend/tinyllama-sql-explainer-full/
-*.pdf
+dist/
+playwright-report/
+test-results/
+*.log
+.DS_Store
+app/backend/static/docs/*
+!app/backend/static/docs/.keep
+app/backend/fine-tuned-t5-small-sql/
+app/backend/tinyllama-sql-explainer-full/
+*.safetensors
+*.pt
+*.pth

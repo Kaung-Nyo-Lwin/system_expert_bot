@@ -1,136 +1,143 @@
-# SoftwareDocBot: Bridging the Gap Between Developers and Business Users  
-_A Schema-Aware NLP Assistant for SQL and Software System Documentation_
+# SoftwareDocBot
 
-## Class Project for AT82.05 – Artificial Intelligence: Natural Language Understanding  
-**Supervised by:** Asst. Prof. Chaklam Silpasuwanchai  
-**Team Name:** Software Intelligence Squad
+**Make database logic understandable.**
 
+A SQL documentation assistant that connects business questions, database schemas, and readable explanations. Explore query relationships, inspect SQL step by step, and export the result as a document.
 
+A portfolio project maintained by **[Kaung Nyo Lwin](https://github.com/Kaung-Nyo-Lwin)**, developed from a collaborative Natural Language Understanding research project at the Asian Institute of Technology.
 
-## Team Members
-- **Kaung Nyo Lwin** – Data Science and AI, AIT ([st125066@ait.ac.th](mailto:st125066@ait.ac.th))
-- **Phone Myint Naing** – Data Science and AI, AIT ([st124973@ait.ac.th](mailto:st124973@ait.ac.th))
-- **Khin Yadanar Hlaing** – Data Science and AI, AIT ([st124959@ait.ac.th](mailto:st124959@ait.ac.th))
+[Quick start](#quick-start) · [Architecture](docs/ARCHITECTURE.md) · [Research results](docs/RESEARCH.md) · [Original demo recording](https://drive.google.com/file/d/1tPBjoKACIbF4xF4Vv0mB9_JgCbbVjDry/view)
 
+![SoftwareDocBot workspace with SQL tools and a guided database demo](docs/images/overview.png)
 
-##  Abstract
+## Why this project
 
-**SoftwareDocBot** is an AI-powered documentation assistant that explains SQL queries and database schema structures in plain, human-readable language. Designed for both developers and business stakeholders, it leverages SQL parsing, knowledge graphs, retrieval-augmented generation (RAG), and fine-tuned language models to deliver contextual explanations of software logic. It also supports interactive Q&A about database behavior—making software systems more transparent, maintainable, and accessible to all levels of users.
+SQL describes what a system does, but the business reasoning is often buried in joins, filters, and stored procedures. SoftwareDocBot explores how structured schema context and retrieval can make that logic easier to explain to developers, analysts, and new team members.
 
+The research combines **SQLGlot**, **NetworkX**, **LlamaIndex**, and language models. The portfolio application adds a lightweight, reproducible way to explore the idea without downloading model weights or buying API credits.
 
-##  Project Workflow
+## Try it
 
-![SoftwareDocBot Architecture](assets/workflow.png)
+| Workspace | Local demo | Optional research mode |
+| --- | --- | --- |
+| Ask your database | Three prepared walkthroughs with source links and parsed query graphs | Original retrieval and graph workflow with Groq or OpenAI |
+| SQL generator | Prepared SQL for the bundled question/schema pairs | Locally fine-tuned T5 checkpoint |
+| SQL explainer | Structural analysis of your own MySQL SELECT queries | TinyLlama with the original LoRA adapter |
+| Documentation | Unicode Word documents for chat and explanations | Same export interface |
 
+The demo is explicitly labeled in the interface. Sample answers are not presented as live model output. **No database connection is opened and no SQL is executed.**
 
-##  Problem Statement
+## Quick start
 
-Modern software systems depend heavily on complex SQL queries and dynamic schemas. However:
-- **Developers** often face unclear or outdated documentation.
-- **Business users** struggle to interpret backend logic.
-- Traditional documentation focuses on structure, not semantics.
-- Miscommunication slows development and onboarding.
+Use **Python 3.11–3.12** and **Node.js 22.12+**. Run these commands from the repository root:
 
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements-dev.txt
+cp .env.example .env
+python -m app.backend.app
+```
 
-##  Project Goals
+In another terminal:
 
-- Generate business-aligned explanations for SQL and schema logic.
-- Bridge technical and non-technical understanding using NLP.
-- Support schema-aware documentation with real-time querying.
-- Reduce hallucination in LLMs using graph-based schema grounding.
+```bash
+cd app/frontend
+npm ci
+npm run dev
+```
 
+Open **http://localhost:5173**. The API runs on port 8000; Vite forwards `/api` requests to it.
 
-## Scope of the Project
+1. Open **Ask your database** and select **How is monthly revenue calculated?**
+2. Read the explanation, inspect its relationship graph, and download the documentation.
+3. Open **SQL explainer**, load an example, and change its filter or aggregation to see the parsed explanation change.
 
-SoftwareDocBot integrates:
-- SQL parsing via `sqlglot`
-- Knowledge graph construction with `NetworkX`
-- Context retrieval through `FAISS`
-- Explanation generation using a fine-tuned `TinyLlama-1.1B-Chat` model
-- An event-driven, agentic workflow to coordinate parsing, retrieval, generation, and feedback
+For Windows, activate the environment with `.venv\Scripts\Activate.ps1`. For model checkpoints, environment variables, and troubleshooting, see [setup](docs/SETUP.md).
 
+### Run with Docker
 
+```bash
+docker compose up --build
+```
 
-##  Related Work
+Open **http://localhost:8080**. This serves the built frontend and API together in demo mode. [Deployment details](docs/SETUP.md#deployment).
 
-Our approach is inspired by key research across semantic parsing, schema reasoning, and language modeling. The **Spider dataset** by Yu et al. (2018) provides a benchmark for complex text-to-SQL tasks, which models like **RAT-SQL** (Wang et al., 2020) have extended through relation-aware encoding of schema elements. However, these models focus on generating SQL from text, while we aim to reverse the pipeline—explaining SQL in natural language.
+## Engineering decisions
 
-To strengthen schema reasoning, we draw on graph-based learning methods, such as **COMET** (Bosselut et al., 2019), which generates commonsense explanations from structured triples. Our method similarly constructs schema-aware knowledge graphs and aligns them with SQL behavior. For explanation generation, we follow the **RAG paradigm** (Lewis et al., 2020) to combine LLM generation with retrievable context. Works like **GraphCodeBERT** and **RepoAgent** further show the value of combining graph structure and pre-trained models for documentation.
+- **An honest, useful demo.** The explainer performs real SQL parsing; chat and SQL generation expose clearly labeled examples when models are unavailable.
+- **Lazy model loading.** Starting the API does not load PyTorch, download embeddings, or require model weights.
+- **Schema context you can inspect.** Relationship graphs show query, table, and column connections with a text alternative.
+- **Predictable API behavior.** Validated JSON inputs, bounded request sizes, useful errors, configurable origins, and unique document filenames.
+- **A complete review path.** Backend tests, browser tests, CI, setup documentation, and preserved research artifacts.
 
-Finally, we incorporate an **agentic workflow**, a concept proposed in recent LLM literature (Zhuge et al., 2023; Hong et al., 2024), to ensure modular control over execution, quality review, and iterative refinement.
+```mermaid
+flowchart LR
+    UI[React workspace] --> API[Flask API]
+    API --> Demo[Local demo]
+    Demo --> Parser[SQLGlot analysis]
+    Demo --> Samples[Prepared OurSpace examples]
+    API -. optional .-> Research[Retrieval + schema graph + language models]
+    Parser --> Result[Explanation + relationships]
+    Samples --> Result
+    Research --> Result
+    Result --> UI
+    Result --> Docs[Word document]
+```
 
+## My contribution
 
+My original work focused on the **event-driven agent workflow**, integrating the **OurSpace system context**, preparing **evaluation questions and reference answers**, and documenting the research. These contributions are represented in the repository's commit history, including the [workflow](https://github.com/Kaung-Nyo-Lwin/system_expert_bot/commit/7df1622), [evaluation data](https://github.com/Kaung-Nyo-Lwin/system_expert_bot/commit/319d34d), and [report](https://github.com/Kaung-Nyo-Lwin/system_expert_bot/commit/de26d3e).
 
-##  Methodology Overview
+This portfolio edition adds the redesigned workspace, a model-free demo, application configuration, document export improvements, automated checks, and practical documentation.
 
-Our system consists of four major modules:
+## Research snapshot
 
-###  SQL Parser
-Extracts query components (tables, columns, joins, filters) using `sqlglot`.
+The original class report records the following explanation-similarity scores:
 
-###  Knowledge Graph Construction
-Builds two graphs with `NetworkX`:
-- **Schema-level**: static structure of the database
-- **Query-level**: query interactions with schema nodes
+| Configuration | BLEU | ROUGE-L | METEOR |
+| --- | ---: | ---: | ---: |
+| Simple RAG | 0.0979 | 0.2633 | 0.3211 |
+| Workflow without graph | 0.1263 | 0.2750 | 0.3284 |
+| Complete workflow | 0.1291 | 0.2847 | 0.3318 |
+| Complete workflow with trained model | 0.4210 | 0.5407 | 0.5381 |
 
-###  Agentic Workflow
-Modular, event-driven pipeline coordinating:
-- Document embedding
-- Question generation
-- Retrieval (RAG + KG)
-- Explanation synthesis
-- Feedback refinement
+These are **reported classroom results**, not a reproduced benchmark of the portfolio demo. Text-overlap metrics do not establish factual correctness or production readiness. See the [research notes and limitations](docs/RESEARCH.md) for sources and context.
 
-###  LLM Fine-Tuning
-Uses the **Gretel Synthetic Text-to-SQL Dataset** to fine-tune `TinyLlama-1.1B-Chat`, training it to explain queries using structured context and domain-aware prompts.
+## Development
 
+```bash
+# From the repository root, with the Python environment activated
+python -m pytest
 
+# Frontend production build and browser checks
+cd app/frontend
+npm run build
+npx playwright install chromium
+npm test
+```
 
-##  Evaluation Summary
+Browser tests start the frontend and backend automatically; they expect `.venv` at the repository root. CI runs the same checks using Python 3.12 and Node 22.
 
-We evaluated SoftwareDocBot using:
-- A 50-query test set across SQL complexity levels
-- BLEU, ROUGE-L, and METEOR scores
-- Baselines: ChatGPT-4o, TinyLlama (pre- and post-fine-tuning)
+```text
+app/backend/       Flask API, deterministic SQL analysis, research integrations
+app/frontend/      React workspace, visualizations, browser tests
+tests/             API, SQL parsing, and document regression tests
+docs/              Setup, architecture, research notes, screenshots
+R&D/               Original experiments, notebooks, and evaluation data
+Documents/         Original LaTeX research report
+```
 
-Result: Our fine-tuned model provided more context-aware and accurate explanations than both baselines in most scenarios.
+## Current boundaries
 
+The local explainer supports a single MySQL SELECT, including joins, filters, grouping, sorting, and limits. CTEs, nested SELECTs, stored procedures, and writes are outside its current scope. It describes syntax and relationships; it does not verify business intent or execute queries.
 
+The original T5 checkpoint and TinyLlama adapter are **not included**. Live research mode requires additional dependencies and credentials, and has not been validated against a live provider as part of the portfolio refresh.
 
+## Credits
 
-##  Tech Stack
+Originally developed for **AT82.05 — Artificial Intelligence: Natural Language Understanding**, Asian Institute of Technology, under **Asst. Prof. Chaklam Silpasuwanchai**.
 
-- `sqlglot`, `NetworkX`, `sentence-transformers`, `FAISS`
-- `TinyLlama-1.1B-Chat` (fine-tuned)
-- `transformers`, `trl`, `torch`, `fp16` mixed precision
+**Original team:** Kaung Nyo Lwin, Phone Myint Naing, and Khin Yadanar Hlaing (Software Intelligence Squad).
 
-
-##  Target Users
-
-- **Developers:** Understand legacy SQL quickly  
-- **Business Analysts/Product Owners:** Ask questions in plain English  
-- **QA/Testers:** Validate backend behavior logically  
-- **New Team Members:** Learn software systems faster
-
-## 📽️ Demo Video
-
-Watch the demo here: [SoftwareDocBot Demo](https://drive.google.com/file/d/1tPBjoKACIbF4xF4Vv0mB9_JgCbbVjDry/view?usp=sharing)
-
-
-##  Web Interface
-
-![SoftwareDocBot Architecture](assets/1.png)
-
-
-![SoftwareDocBot Architecture](assets/2.png)
-
-
-
-![SoftwareDocBot Architecture](assets/3.png)
-
-
-![SoftwareDocBot Architecture](assets/4.png)
-
-
-![SoftwareDocBot Architecture](assets/5.png)
-
+This is Kaung Nyo Lwin's maintained portfolio edition of that team project. Original authorship, commit history, research artifacts, and third-party notices are retained.

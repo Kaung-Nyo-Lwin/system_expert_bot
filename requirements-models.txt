@@ -1,0 +1,13 @@
+# Optional research environment; the portfolio demo does not need these.
+-r requirements.txt
+torch==2.6.0
+transformers==4.50.3
+peft==0.15.2
+sentence-transformers==4.0.1
+llama-index-core==0.12.32
+llama-index-readers-file==0.4.7
+llama-index-llms-openai==0.3.38
+llama-index-embeddings-huggingface==0.5.3
+langchain-groq==0.2.5
+networkx==3.4.2
+pyvis==0.3.2

@@ -1,41 +1,38 @@
-import React from "react";
+import React, { lazy } from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import AppShell from "./components/AppShell";
+import { AppProvider } from "./lib/context";
 import LandingPage from "./pages/LandingPage";
-import ChatPage from "./pages/ChatPage";
-import ModelOnePage from "./pages/ModelOnePage"; 
-import ModelTwoPage from "./pages/ModelTwoPage";
 import "./index.css";
 
+const ChatPage = lazy(() => import("./pages/ChatPage"));
+const SqlWorkspace = lazy(() => import("./pages/SqlWorkspace"));
+
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <Router>
-    <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/chat" element={<ChatPage />} />
-      <Route path="/model1" element={<ModelOnePage />} /> {/* ADD THIS */}
-      <Route path="/model2" element={<ModelTwoPage />} /> {/* ADD THIS */}
-
-    </Routes>
-  </Router>
+  <React.StrictMode>
+    <BrowserRouter>
+      <AppProvider>
+        <Routes>
+          <Route element={<AppShell />}>
+            <Route index element={<LandingPage />} />
+            <Route path="chat" element={<ChatPage />} />
+            <Route path="model1" element={<SqlWorkspace key="generate" mode="generate" />} />
+            <Route path="model2" element={<SqlWorkspace key="explain" mode="explain" />} />
+            <Route
+              path="*"
+              element={
+                <div className="empty-state">
+                  <h1>Page not found</h1>
+                  <Link className="button primary" to="/">
+                    Back to overview
+                  </Link>
+                </div>
+              }
+            />
+          </Route>
+        </Routes>
+      </AppProvider>
+    </BrowserRouter>
+  </React.StrictMode>,
 );
-
-
-// import React from "react";
-// import ReactDOM from "react-dom/client";
-// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import LandingPage from "./pages/LandingPage";
-// import ChatPage from "./pages/ChatPage";
-// import ModelOnePage from "./pages/ModelOnePage"; // ADD THIS
-// import ModelTwoPage from "./pages/ModelTwoPage"; // ADD THIS
-// import "./index.css";
-
-// ReactDOM.createRoot(document.getElementById("root")).render(
-//   <Router>
-//     <Routes>
-//       <Route path="/" element={<LandingPage />} />
-//       <Route path="/chat" element={<ChatPage />} />
-//       <Route path="/model1" element={<ModelOnePage />} /> {/* ADD THIS */}
-//       <Route path="/model2" element={<ModelTwoPage />} /> {/* ADD THIS */}
-//     </Routes>
-//   </Router>
-// );
